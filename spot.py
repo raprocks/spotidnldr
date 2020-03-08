@@ -80,13 +80,16 @@ class spotr:
             
         elif characteristics[0] == 'album':
             results = self.spotify.album(characteristics[1])
+            print(json.dumps(results, sort_keys=True, ensure_ascii=   False, indent=3))
+            for track in results["tracks"]["items"]:
+                print(track["name"],
+                track["uri"])
+            
         elif characteristics[0] == 'artist':
             results = self.spotify.artist_albums(characteristics[1])
         elif characteristics[0] == 'playlist':
             results = self.spotify.playlist(characteristics[1])
 
-        
 
 
-        
 res = spotr('shcixv399pe9eirp62esm93').get_song_info(input(">>>>> \t"))
