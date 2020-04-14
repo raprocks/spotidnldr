@@ -1,6 +1,7 @@
 import spotipy
 import spotipy.util as util
 import sys
+from tree import *
 import json
 def get_userid_from_url(url):
     url = str(url)
@@ -62,34 +63,32 @@ class spotr:
            # print(json.dumps(results, sort_keys=True, ensure_ascii=False, indent=3))
             #album_data
             album = results["album"]["name"]
-            album_artists = []
-            for album_artist in results["album"]["artists"]:
-                album_artists.append(album_artist["name"])
+            album_artists = [album_artist["name"] for album_artist in results["album"]["artists"]]
             album_url = results["album"]["external_urls"]["spotify"]
             album_cover = results["album"]["images"][0]["url"]
             album_release_date = results["album"]["release_date"]
             total_tracks = results["album"]["total_tracks"]
             #song_data
             name = results["name"]
-            artists = []
-            for artist in results["artists"]:
-                artists.append(artist["name"])
+            artists = [artist["name"] for artist in results["artists"]]
             track_number = results["track_number"]
             track_url = results["external_urls"]["spotify"]
             explicit = results["explicit"]
-            
+            return_dict = {"album_data":{"album_name":album, "album_artists":str(album_artists).strip("[").strip("]"), "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks": total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}}
         elif characteristics[0] == 'album':
-            results = self.spotify.album(characteristics[1])
-            print(json.dumps(results, sort_keys=True, ensure_ascii=   False, indent=3))
-            for track in results["tracks"]["items"]:
-                print(track["name"],
-                track["uri"])
-            
+            results = self.spotify.album_tracks(characteristics[1])
+            song_names = [(song["name"] + "-" + str([artist["name"] for artist in song["artists"]]).strip("[").strip("]")) for song in results["items"]]
+            for song_name in song_names:
+                print(song_name, end=", \n")
         elif characteristics[0] == 'artist':
             results = self.spotify.artist_albums(characteristics[1])
         elif characteristics[0] == 'playlist':
             results = self.spotify.playlist(characteristics[1])
+        return results
+        return_dict = {"album_data":{},"track_data":{}}
 
 
-
-res = spotr('shcixv399pe9eirp62esm93').get_song_info(input(">>>>> \t"))
+res = spotr('shcixv399pe9eirp62esm93').get_song_info("https://open.spotify.com/album/4otkd9As6YaxxEkIjXPiZ6?si=znyfYGKERvWU-8tbbT0rTw")
+#PrintTree().printTree(tree=res)
+#with open("f.json", "w+") as f:
+#    f.write(str(json.dumps(res, indent=4)))
