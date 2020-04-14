@@ -1,7 +1,7 @@
 import spotipy
 import spotipy.util as util
 import sys
-from tree import *
+#from tree import *
 import json
 def get_userid_from_url(url):
     url = str(url)
