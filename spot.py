@@ -103,8 +103,5 @@ class spotr:
 #        return_dict = {"album_data":{},"track_data":{}}
 
 
-res = spotr('shcixv399pe9eirp62esm93').get_song_info("https://open.spotify.com/album/4otkd9As6YaxxEkIjXPiZ6?si=znyfYGKERvWU-8tbbT0rTw")
-print(json.dumps(res, indent=3)
-#PrintTree().printTree(tree=res)
-#with open("f.json", "w+") as f:
-#    f.write(str(json.dumps(res, indent=4)))
+res = spotr('shcixv399pe9eirp62esm93').get_song_info(input("input url"))
+print(json.dumps(res, indent=3))
