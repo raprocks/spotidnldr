@@ -86,10 +86,10 @@ class spotr:
             total_tracks=len(results["tracks"])
             #track data
             song_names = [song["name"] for song in results["tracks"]["items"]]
-            artists = []
-            for track in results["tracks"]["items"]:
-                artists.append([artist["name"] for artist in track["artists"]])
-#            artists = [[(artist["name"] for artist in track["artists"])] for track in results["tracks"]["items"]]
+#            artists = []
+#            for track in results["tracks"]["items"]:
+#                artists.append([artist["name"] for artist in track["artists"]])
+            artists = [([artist["name"] for artist in track["artists"]]) for track in results["tracks"]["items"]]
             explicits=[]
             track_urls=[track["external_urls"]["spotify"] for track in results["tracks"]["items"]]
 #            for song_name in song_names:
