@@ -1,7 +1,6 @@
 import spotipy
 import spotipy.util as util
 import sys
-#from tree import *
 import json
 def get_userid_from_url(url):
     url = str(url)
@@ -83,14 +82,14 @@ class spotr:
             album_url=results["external_urls"]["spotify"]
             album_cover=results["images"][0]["url"]
             album_release_date=results["release_date"]
-            total_tracks=len(results["tracks"])
+            total_tracks=results["total_tracks"]
             #track data
             song_names = [song["name"] for song in results["tracks"]["items"]]
 #            artists = []
 #            for track in results["tracks"]["items"]:
 #                artists.append([artist["name"] for artist in track["artists"]])
             artists = [([artist["name"] for artist in track["artists"]]) for track in results["tracks"]["items"]]
-            explicits=[]
+            explicits=[track["track_number"] for track in results["tracks"]["items"] if track["explicit"]]
             track_urls=[track["external_urls"]["spotify"] for track in results["tracks"]["items"]]
 #            for song_name in song_names:
 #                print(song_name, end=", \n")
@@ -98,10 +97,13 @@ class spotr:
             return return_dict
         elif characteristics[0] == 'artist':
             results = self.spotify.artist_albums(characteristics[1])
+            return results
         elif characteristics[0] == 'playlist':
-            results = self.spotify.playlist(characteristics[1])
+            results = self.spotify.playlist_tracks(characteristics[1])
+            return results
 #        return_dict = {"album_data":{},"track_data":{}}
 
 
-res = spotr('shcixv399pe9eirp62esm93').get_song_info(input("input url"))
+res = spotr('shcixv399pe9eirp62esm93').get_song_info("https://open.spotify.com/playlist/3YGQmkNbRSkryYswpbUfD9?si=fXilnc3nRWyrLPcrdsOQ2w")
 print(json.dumps(res, indent=3))
+#print(res)
