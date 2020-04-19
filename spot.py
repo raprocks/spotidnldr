@@ -100,10 +100,25 @@ class spotr:
             return results
         elif characteristics[0] == 'playlist':
             results = self.spotify.playlist_tracks(characteristics[1])
-            return results
+            tracks=[track["track"] for track in results["items"]]
+            #album_data
+            albums = [track["album"]["name"] for track in tracks]
+            album_artistss = [[album_artist["name"] for album_artist in track["album"]["artists"]] for track in tracks]
+            album_urls = [track["album"]["external_urls"]["spotify"] for track in tracks]
+            album_covers = [track["album"]["images"][0]["url"] for track in tracks]
+            album_release_dates = [track["album"]["release_date"] for track in tracks]
+            total_trackss = [track["album"]["total_tracks"] for track in tracks]
+            #songs_data
+            names = [track["name"] for track in tracks]
+            artistss = [([artist["name"] for artist in track["artists"]]) for track in tracks]
+            track_numbers = [track["track_number"] for track in tracks]
+            track_urls = [track["external_urls"]["spotify"] for track in tracks]
+            explicits = [track["explicit"] for track in tracks]
+            return_dict =[{"album_data":{"name":album, "album_artists":str(album_artists).strip("[]"), "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks": total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}} for album,album_artists, album_url, album_cover, album_release_date, total_tracks, name, artists, track_number, track_url, explicit in zip(albums, album_artistss, album_urls, album_covers, album_release_dates, total_trackss, names, artistss, track_numbers, track_urls, explicits)]
+            return return_dict
 #        return_dict = {"album_data":{},"track_data":{}}
 
 
-res = spotr('shcixv399pe9eirp62esm93').get_song_info("https://open.spotify.com/playlist/3YGQmkNbRSkryYswpbUfD9?si=fXilnc3nRWyrLPcrdsOQ2w")
+res = spotr('shcixv399pe9eirp62esm93').get_song_info("https://open.spotify.com/playlist/15ngsvOmlTkARCg7ipoNvG?si=Yhe8KPEMTEmF98ZfTrTBpg")
 print(json.dumps(res, indent=3))
 #print(res)
