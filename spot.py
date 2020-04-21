@@ -96,6 +96,7 @@ class spotr:
             return_dict=[{"album_data":{"name":album, "album_artists":album_artists, "url":album_url, "album_cover":album_cover, "album_release_date":album_release_date, "total_tracks":total_tracks}, "tracks_data":{"name":song_name, "song_artists":artists, "explicits":explicit, "track_urls":track_url}} for song_name,artists,explicit,track_url in zip(song_names,artistss,explicits,track_urls)]
         elif characteristics[0] == 'artist':
             offset = 0
+            return_dict=[]
             results = self.spotify.artist_albums(characteristics[1])
             total_albums = results["total"]
             results_for_artist=self.spotify.artist(characteristics[1])
@@ -103,7 +104,6 @@ class spotr:
             while offset<total_albums:
                 results = self.spotify.artist_albums(characteristics[1], offset=offset, limit=50)
                 albumResults = results['items']
-                return_dict=[]
                 for item in albumResults:
                     #print("ALBUM: " + item['name'])
                     albumurl = item['external_urls']["spotify"]
@@ -144,4 +144,5 @@ if __name__=="__main__":
     res = spotr('shcixv399pe9eirp62esm93').get_song_info(input("enter url to pull data about"))
     #print(res)
     print(json.dumps(res, indent=3))
+    print(len(res))
 #print(res)
