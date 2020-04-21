@@ -48,7 +48,7 @@ class spotr:
             link_id = link_id[0]
         else:
             pass
-        print(link_type, link_id)
+        #print(link_type, link_id)
         uri = "spotify:"+str(link_type)+":"+str(link_id)
    #     print(str(uri))
         return [link_type, link_id]
@@ -73,7 +73,7 @@ class spotr:
             track_number = results["track_number"]
             track_url = results["external_urls"]["spotify"]
             explicit = results["explicit"]
-            return_dict = {"album_data":{"name":album, "album_artists":str(album_artists).strip("[]"), "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks": total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}}
+            return_dict = {"album_data":{"name":album, "album_artists":album_artists, "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks": total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}}
         elif characteristics[0] == 'album':
             results = self.spotify.album(characteristics[1])
             #album data
@@ -88,16 +88,38 @@ class spotr:
 #            artists = []
 #            for track in results["tracks"]["items"]:
 #                artists.append([artist["name"] for artist in track["artists"]])
-            artists = [([artist["name"] for artist in track["artists"]]) for track in results["tracks"]["items"]]
-            explicits=[track["track_number"] for track in results["tracks"]["items"] if track["explicit"]]
+            artistss = [([artist["name"] for artist in track["artists"]]) for track in results["tracks"]["items"]]
+            explicits=[track["explicit"] for track in results["tracks"]["items"]]
             track_urls=[track["external_urls"]["spotify"] for track in results["tracks"]["items"]]
 #            for song_name in song_names:
 #                print(song_name, end=", \n")
-            return_dict={"album_data":{"name":album, "album_artists":str(album_artists).strip("[]"), "url":album_url, "album_cover":album_cover, "album_release_date":album_release_date, "total_tracks":total_tracks}, "tracks_data":{"names":song_names, "song_artists":artists, "explicits":explicits, "track_urls":track_urls}}
-            return return_dict
+            return_dict=[{"album_data":{"name":album, "album_artists":album_artists, "url":album_url, "album_cover":album_cover, "album_release_date":album_release_date, "total_tracks":total_tracks}, "tracks_data":{"name":song_name, "song_artists":artists, "explicits":explicit, "track_urls":track_url}} for song_name,artists,explicit,track_url in zip(song_names,artistss,explicits,track_urls)]
         elif characteristics[0] == 'artist':
+            offset = 0
             results = self.spotify.artist_albums(characteristics[1])
-            return results
+            total_albums = results["total"]
+            results_for_artist=self.spotify.artist(characteristics[1])
+            Name=results_for_artist["name"]
+            while offset<total_albums:
+                results = self.spotify.artist_albums(characteristics[1], offset=offset, limit=50)
+                albumResults = results['items']
+                return_dict=[]
+                for item in albumResults:
+                    #print("ALBUM: " + item['name'])
+                    albumurl = item['external_urls']["spotify"]
+                    albumArt = item['images'][0]['url']
+                    # Extract track data
+                    trackResults = self.get_song_info(albumurl)
+                    for item in trackResults:
+                        if Name in str(item["tracks_data"]["song_artists"]):
+                            #print(item["tracks_data"]["name"])
+                            return_dict.append(item)
+                print(offset)
+                offset+=50
+                    
+
+                        
+            #return_dict =[{"album_data":{"name":album, "album_artists":str(album_artists).strip("[]"),"url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks":total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}} for album,album_artists, album_url, album_cover, album_release_date, total_tracks, name, artists, track_number, track_url, explicit in zip(albums, album_artistss, album_urls, album_covers, album_release_dates, total_trackss, names, artistss, track_numbers, track_urls, explicits)]
         elif characteristics[0] == 'playlist':
             results = self.spotify.playlist_tracks(characteristics[1])
             tracks=[track["track"] for track in results["items"]]
@@ -115,10 +137,11 @@ class spotr:
             track_urls = [track["external_urls"]["spotify"] for track in tracks]
             explicits = [track["explicit"] for track in tracks]
             return_dict =[{"album_data":{"name":album, "album_artists":str(album_artists).strip("[]"), "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks": total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}} for album,album_artists, album_url, album_cover, album_release_date, total_tracks, name, artists, track_number, track_url, explicit in zip(albums, album_artistss, album_urls, album_covers, album_release_dates, total_trackss, names, artistss, track_numbers, track_urls, explicits)]
-            return return_dict
+        return return_dict
 #        return_dict = {"album_data":{},"track_data":{}}
 
-
-res = spotr('shcixv399pe9eirp62esm93').get_song_info("https://open.spotify.com/playlist/15ngsvOmlTkARCg7ipoNvG?si=Yhe8KPEMTEmF98ZfTrTBpg")
-print(json.dumps(res, indent=3))
+if __name__=="__main__":
+    res = spotr('shcixv399pe9eirp62esm93').get_song_info(input("enter url to pull data about"))
+    #print(res)
+    print(json.dumps(res, indent=3))
 #print(res)
