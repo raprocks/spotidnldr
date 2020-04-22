@@ -1,7 +1,7 @@
 import spotipy
 import spotipy.util as util
 import json
-
+from cover_download import dl_jpg
 
 
 class spotr:
@@ -51,7 +51,7 @@ class spotr:
             track_number = results["track_number"]
             track_url = results["external_urls"]["spotify"]
             explicit = results["explicit"]
-            return_dict = {"album_data":{"name":album, "album_artists":album_artists, "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks": total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}}
+            return_dict = [{"album_data":{"name":album, "album_artists":album_artists, "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks": total_tracks},"track_data":{"name":name, "artists": artists, "track_number":track_number, "url":track_url, "explicit":explicit}}]
         elif characteristics[0] == 'album':
             results = self.spotify.album(characteristics[1])
             #album data
@@ -113,6 +113,15 @@ class spotr:
         return return_dict
 
 if __name__=="__main__":
-    res = spotr('shcixv399pe9eirp62esm93').get_song_info(input("enter url to pull data about"))
+    res = spotr('shcixv399pe9eirp62esm93').get_song_info("input url >>>>  ")
     print(json.dumps(res, indent=3))
-    print(len(res))
+    #print(len(res))
+    for each in res:
+        url = each["album_data"]["album_cover"]
+        path = "./"
+        name = each["track_data"]["name"]+ " - " +"\"" + str(each["track_data"]["artists"])
+        print(url, path, name)
+        if "/" in name:
+            name = name.replace("/\\\\","Λ" )
+        dl_jpg(url, path, name)
+    print("done")
