@@ -1,10 +1,11 @@
 import urllib.request
+import os
 
 def dl_jpg(url, file_path, file_name):
     name = file_name
-    print(url, path, name)
+    print(url, file_path, name)
     if "/" in name:
-        file_name = name.replace("/\\\\","Λ" )
+        file_name = name.replace("/","|")
     full_path = file_path + file_name + '.jpg'
     urllib.request.urlretrieve(url, full_path)
 
@@ -12,4 +13,6 @@ def dl_jpg(url, file_path, file_name):
 if __name__=="__main__":
     url = input('Enter image URL to download: ')
     file_name = input('Enter file name to save as: ')
-    dl_jpg(url, 'images/', file_name)
+    if "images" not in os.listdir():
+        os.mkdir("./images")
+    dl_jpg(url, file_path='./images/', file_name=file_name)
