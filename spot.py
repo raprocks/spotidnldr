@@ -2,10 +2,11 @@ import spotipy
 import spotipy.util as util
 import json
 from cover_download import dl_jpg
+import os
 
 
 class spotr:
-    def __init__(self, userid):
+    def __init__(self, userid=os.environ["SPOTIFY_USER_ID"]):
         try:
             local_token = util.prompt_for_user_token(userid)
         except:
@@ -113,7 +114,7 @@ class spotr:
         return return_dict
 
 if __name__=="__main__":
-    res = spotr('shcixv399pe9eirp62esm93').get_song_info("input url >>>>  ")
+    res = spotr().get_song_info(input(" url >>>>  "))
     print(json.dumps(res, indent=3))
     #print(len(res))
     for each in res:
