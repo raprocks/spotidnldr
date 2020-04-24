@@ -3,6 +3,7 @@ import spotipy.util as util
 import json
 from cover_download import dl_jpg
 import os
+from tag_embedder import tag_embed
 
 
 class spotr:
@@ -118,11 +119,16 @@ if __name__=="__main__":
     print(json.dumps(res, indent=3))
     #print(len(res))
     for each in res:
-        url = each["album_data"]["album_cover"]
-        path = "./"
+        album_cover_url = each["album_data"]["album_cover"]
         name = each["track_data"]["name"]+ " - " + str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
-        print(url, path, name)
+        song_artists = str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
+        album_name = each["album_data"]["name"]
+        album_artists = str(each["album_data"]["album_artists"]).strip("[]").strip("\'").replace("\'", "")
+        track_number = each["track_data"]["track_number"]
+        total_tracks = each["album_data"]["total_tracks"]
+        release_date = each["album_data"]["album_release_date"]
         if "/" in name:
-            name = name.replace("/\\\\","Λ" )
-        dl_jpg(url, path, name)
+            name = name.replace("/\\","" )
+        img_name = dl_jpg(album_cover_url, "./.temp", name)
+        tag_embed("<your song name here with extension and relative or full path>", title=name, artists=song_artists, album=album_name, album_artists=album_artists, release_date=release_date, track_number=track_number, total_tracks=total_tracks, img_path=img_name)
     print("done")
