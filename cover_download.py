@@ -12,7 +12,7 @@ def dl_jpg(url, file_path, file_name):
             file_name = name.replace("\\", "")
         break
         
-    full_path = Path(file_path + file_name + '.jpg')
+    full_path = Path(os.path.join(file_path,str(file_name + '.jpg')))
     print(full_path)
     urllib.request.urlretrieve(url, full_path)
 
