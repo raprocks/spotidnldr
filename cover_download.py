@@ -21,5 +21,5 @@ if __name__=="__main__":
     url = input('Enter image URL to download: ')
     file_name = input('Enter file name to save as: ')
     if "images" not in os.listdir():
-        os.mkdir("./images")
-    dl_jpg(url, file_path='./images/', file_name=file_name)
+        os.mkdir(Path("images"))
+    dl_jpg(url, file_path=Path("images"), file_name=file_name)
