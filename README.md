@@ -66,7 +66,8 @@ The .bashrc is a shell script that is run everytime bash is started. It has cert
 ```bash
 source .bashrc
 ```
-    * This will run the .bashrc file and you will see the effects right there on the terminal.
+
+* This will run the .bashrc file and you will see the effects right there on the terminal.
 ###### What is its use to us for this program and how can we use it to set environment variables
 To set a certain environment variable we use the export command
 ```bash
