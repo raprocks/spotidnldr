@@ -91,6 +91,7 @@ export YOUTUBE_API_KEY="<the api key you obtained from google api dashboard>"
 ```
 you just have to copy and paste these commands in your .bashrc file replacing the placeholders denoted by **< & >**.
 
-You can get your Spotify User Id by visiting this [link](https://www.spotify.com/in/account/overview/)
+You can get your Spotify User Id by visiting this [link](https://www.spotify.com/in/account/overview/). 
+   * Note: Here Spotify User Id means your username.
 
 #### **For Windows Users** please follow the guide [Here](https://www.computerhope.com/issues/ch000549.htm)
