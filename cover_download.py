@@ -9,6 +9,8 @@ def dl_jpg(url, file_path, file_name):
         if "/" in name:
             file_name = name.replace("/","|")
         elif "\\" in name:
+            file_name = name.replace("\\", "")
+        break
         
     full_path = Path(file_path + file_name + '.jpg')
     print(full_path)
