@@ -120,7 +120,7 @@ if __name__=="__main__":
     for each in res:
         url = each["album_data"]["album_cover"]
         path = "./"
-        name = each["track_data"]["name"]+ " - " +"\"" + str(each["track_data"]["artists"])
+        name = each["track_data"]["name"]+ " - " + str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
         print(url, path, name)
         if "/" in name:
             name = name.replace("/\\\\","Λ" )
