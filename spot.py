@@ -2,9 +2,11 @@ import spotipy
 import spotipy.util as util
 import json
 from cover_download import dl_jpg
+from youtube_search import youtube
 import os
 from tag_embedder import tag_embed
-
+import downloader
+from converter import convert_to_mp3
 
 class spotr:
     def __init__(self, userid=os.environ["SPOTIFY_USER_ID"]):
@@ -115,7 +117,7 @@ class spotr:
         return return_dict
 
 if __name__=="__main__":
-    res = spotr().get_song_info(input(" url >>>>  "))
+    res = spotr().get_song_info(input("inpu >>> "))
     print(json.dumps(res, indent=3))
     #print(len(res))
     for each in res:
@@ -129,6 +131,9 @@ if __name__=="__main__":
         release_date = each["album_data"]["album_release_date"]
         if "/" in name:
             name = name.replace("/\\","" )
-        img_name = dl_jpg(album_cover_url, "./.temp", name)
-        tag_embed("<your song name here with extension and relative or full path>", title=name, artists=song_artists, album=album_name, album_artists=album_artists, release_date=release_date, track_number=track_number, total_tracks=total_tracks, img_path=img_name)
+        img_name = dl_jpg(album_cover_url, "./", name)
+        retrived_from_youtube=youtube().search(query=name,order="relevance", limit=10)
+        infile = downloader.download(url=retrived_from_youtube, file_name=name)
+        convert_to_mp3(infile, f"./{name}.mp3")
+        tag_embed(f"{name}.mp3", title=name, artists=song_artists, album=album_name, album_artists=album_artists, release_date=release_date, track_number=track_number, total_tracks=total_tracks, img_path=img_name)
     print("done")
