@@ -13,9 +13,8 @@ def dl_jpg(url, file_path, file_name):
         break
         
     full_path = Path(os.path.join(file_path,str(file_name + '.jpg')))
-    print(full_path)
     urllib.request.urlretrieve(url, full_path)
-
+    return full_path
 
 if __name__=="__main__":
     url = input('Enter image URL to download: ')
