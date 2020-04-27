@@ -120,12 +120,13 @@ class spotr:
         return return_dict
 
 if __name__=="__main__":
-    res = spotr().get_song_info(input("inpu >>> "))
-    print(json.dumps(res, indent=3))
+    res = spotr().get_song_info(input("input url to dnld🙏🙏 >>> "))
+    #print(json.dumps(res, indent=3))
     #print(len(res))
     for each in res:
         album_cover_url = each["album_data"]["album_cover"]
         name = each["track_data"]["name"]+ " - " + str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
+        title = each["track_data"]["name"]
         song_artists = str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
         album_name = each["album_data"]["name"]
         album_artists = str(each["album_data"]["album_artists"]).strip("[]").strip("\'").replace("\'", "")
@@ -138,5 +139,7 @@ if __name__=="__main__":
         retrived_from_youtube=youtube().search(query=name,order="relevance", limit=10)
         infile = downloader.download(url=retrived_from_youtube, file_name=name)
         convert_to_mp3(infile, f"./{name}.mp3")
-        tag_embed(f"{name}.mp3", title=name, artists=song_artists, album=album_name, album_artists=album_artists, release_date=release_date, track_number=track_number, total_tracks=total_tracks, img_path=img_name)
+        tag_embed(f"{name}.mp3", title=title, artists=song_artists, album=album_name, album_artists=album_artists, release_date=release_date, track_number=track_number, total_tracks=total_tracks, img_path=img_name)
+        os.remove(img_name)
+        os.remove(infile)
     print("done")
