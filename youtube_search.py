@@ -11,10 +11,16 @@ class youtube:
     def search(self, query, order, limit):
         self.parameters={"part":"snippet", "q":str(query),"order":str(order),"maxResults":int(limit),"type":"video","videoCategoryId":"10", "key":self.api_key}
         request_url = str(self._url("search"))
-        self.obje = requests.get(request_url, params=self.parameters )
+        self.obje = requests.get(request_url, params=self.parameters)
         print(self.obje)
-        return self.obje.json()
+        self.search_results=self.obje.json()["items"]
+        _res = []
+        for x in self.search_results:
+            _res.append(x["id"]["videoId"])
+        print(_res)
+        return [_res[0]]
 
 
 if __name__=="__main__":
-    resp = youtube().search(query="F8L FRANKY TAPE", order="relevance", limit=10)
+    resp = youtube().search(query="Home (feat. Bonn) - Martin Garrix, Bonn", order="relevance", limit=10)
+    print(resp)
