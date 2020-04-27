@@ -95,3 +95,24 @@ You can get your Spotify User Id by visiting this [link](https://www.spotify.com
    * Note: Here Spotify User Id means your username.
 
 #### **For Windows Users** please follow the guide [Here](https://www.computerhope.com/issues/ch000549.htm)
+
+### Usage
+* Just run the python script ```spot.py``` by doing
+```bash
+python spot.py
+```
+ In the working directory
+* Then paste the link of spotify Song, Playlist, Album or Artist.(Nicely rhymes)
+
+# Credits
+* ME(obviously) - did everything on my phone.Not kidding.its Hard.
+* All the respective devs of pypi packages
+* Termux.
+
+### To Do List
+- [ ] Make this into a cli application using Click.
+- [ ] try to complete your suggestions and squash the bugs.
+
+Leave a Star if you think i deserve it 😉. Also Checkout [F8L](https://open.spotify.com/artist/6LkOho0r5aIaYkMtjWYDAz?si=O6FR6i9UT1WMpG7bYEBMpg) on spotify.
+# Thanks
+###### ~ Rohit.
