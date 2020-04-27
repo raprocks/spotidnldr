@@ -70,7 +70,10 @@ class spotr:
             artistss = [([artist["name"] for artist in track["artists"]]) for track in results["tracks"]["items"]]
             explicits=[track["explicit"] for track in results["tracks"]["items"]]
             track_urls=[track["external_urls"]["spotify"] for track in results["tracks"]["items"]]
-            return_dict=[{"album_data":{"name":album, "album_artists":album_artists, "url":album_url, "album_cover":album_cover, "album_release_date":album_release_date, "total_tracks":total_tracks}, "tracks_data":{"name":song_name, "song_artists":artists, "explicits":explicit, "track_urls":track_url}} for song_name,artists,explicit,track_url in zip(song_names,artistss,explicits,track_urls)]
+            return_dict=[]
+            i=1
+            for song_name,artists,explicit,track_url in zip(song_names,artistss,explicits,track_urls):
+                return_dict.append({"album_data":{"name":album, "album_artists":str(album_artists).strip("[]"), "url":album_url, "album_cover": album_cover, "album_release_date":album_release_date, "total_tracks":total_tracks},"track_data":{"name":song_name,"artists":artists,"track_number":i,"url":track_url, "explicit":explicit}})
         elif characteristics[0] == 'artist':
             offset = 0
             return_dict=[]
@@ -87,7 +90,7 @@ class spotr:
                     # Extract track data
                     trackResults = self.get_song_info(albumurl)
                     for item in trackResults:
-                        if Name in str(item["tracks_data"]["song_artists"]):
+                        if Name in str(item["track_data"]["artists"]):
                             return_dict.append(item)
                 print(offset)
                 offset+=50
