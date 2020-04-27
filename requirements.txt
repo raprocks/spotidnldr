@@ -1,3 +1,4 @@
+eyeD3
 spotipy
 youtube-dl
 ffmpeg-python
