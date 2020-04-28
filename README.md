@@ -5,7 +5,7 @@ A terminal based application written in Python-3, which helps you download songs
 #### Getting the Files
 Just clone the git repo using 
 ```
-git clone github.com/raprocks/spotidnldr spotidnldr
+git clone https://github.com/raprocks/spotidnldr.git spotidnldr
 ```
 
 Then change your working directory to the newly made folder named spotidnldr
@@ -40,7 +40,8 @@ Next, You need to set some Environment Variables on your system because you don'
 4. Fill in The Information it asks for and check **I Don't Know** under *What Are You Building*.
 5. Now you will see a client ID just copy it and save it somewhere for now.
 6. Also, there is a *Show Client Secret* option just click on it and it will give you another AlphaNumeric key save this one too.
-7. Done!!
+7. Now Click on the edit settings button and scroll down to see **Redirect URI's** section. Just add ```"https://google.com/"``` without the quotes in the textbox below it and click on add. Scroll further below and click on save.
+8. Done!!
 ###### Getting Youtube API keys:-
 1. Go to [Google Developer Console](https://console.developers.google.com/apis/dashboard). If you are on your phone please enable the Desktop Mode it will help you a Lot.
 2. Make a new project and Name it anything you want.
@@ -50,11 +51,10 @@ Next, You need to set some Environment Variables on your system because you don'
 6. On Top of the page Click on *Create Credentials* and then on *API key*.
 7. You will get another AlphaNumeric key, save this too. 
 
-#### Setting the Environment Variables
-###### Using the python script. 
+#### Setting the Environment Variables or The API keys for the program
+###### Using the python script.**(RECCOMENDED)**
 1. There is already a python script named env_setup.py in the files. Just open it using any file editor of your choice and paste the keys you obtained earlier in the specific place and you are good to go.
-2. All the file does is set the environment variable at each start of the program.
-
+2. All the file does is set the variable at each start of the program.
 
 ##### **For Linux and MacOs Users** Using .bashrc
 The .bashrc is a shell script that is run everytime bash is started. It has certain commands written in it by the user or by the system itself that are necessary for the startup or for the requirements of the user.
@@ -76,16 +76,16 @@ export <environment_var_name>="value_for_var"
 Obviously dont put the "<" & ">".
 And put the value in single or double quotes as the value should always be string.
   * For our program we need some variable namely:-
-      * SPOTIFY_CLIENT_ID
+      * SPOTIPY_CLIENT_ID
       * SPOTIPY_CLIENT_SECRET
-      * SPOTIFY_REDIRECT_URI
+      * SPOTIPY_REDIRECT_URI
       * SPOTIFY_USER_ID
       * YOUTUBE_API_KEY
   * Now to set the values of them we use the above command one by one on these variables as follows:-
 ```bash
-export SPOTIFY_CLIENT_ID="<your client id that you first copied>"
+export SPOTIPY_CLIENT_ID="<your client id that you first copied>"
 export SPOTIPY_CLIENT_SECRET="<your client secret that you second copied>"
-export SPOTIFY_REDIRECT_URI="https://google.com"
+export SPOTIPY_REDIRECT_URI="https://google.com"
 export SPOTIFY_USER_ID="your spotify user id>"
 export YOUTUBE_API_KEY="<the api key you obtained from google api dashboard>"
 ```
@@ -94,7 +94,21 @@ you just have to copy and paste these commands in your .bashrc file replacing th
 You can get your Spotify User Id by visiting this [link](https://www.spotify.com/in/account/overview/). 
    * Note: Here Spotify User Id means your username.
 
-#### **For Windows Users** please follow the guide [Here](https://www.computerhope.com/issues/ch000549.htm)
+#### **For Windows Users** please follow the guide [Here](https://www.computerhope.com/issues/ch000549.htm).
+You can also set the variables using the ```set or setx(more permanent)``` commands.
+The syntax is ```set <variable_name>="value_as_string"```. (This does it for a session.)
+Or if you want to permanently set the variables then do ```setx -m <variable_name>="value_as_string"```.
+Obviously the guide above gives you a gui but its quite fun typing commands in cmd and flex on your newly learn commands😆.
+
+### now all you need after this is FFMPEG.
+##### For Windows.
+1. Get FFMPEG from [here](https://www.ffmpeg.org/download.html)
+2. Make a new folder named ffmpeg somewhere and install or extract the downloaded zip to it.
+3. Add FFMPEG to system path by following this guide [here](https://stackoverflow.com/questions/44272416/how-to-add-a-folder-to-path-environment-variable-in-windows-10-with-screensho).
+4. Now you have enables access of FFMPEG from python. 
+##### For Linux.
+1. Follow this guide [here](https://www.tecmint.com/install-ffmpeg-in-linux). 
+2. Done.✌️👌
 
 ### Usage
 * Just run the python script ```spot.py``` by doing
