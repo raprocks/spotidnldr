@@ -1,3 +1,7 @@
+from env_checker import *
+
+check_for_env_vars()
+
 SPOTIPY_CLIENT_ID="<your spotify client id here>"#7983835e2ad84e8097efc6a6c52162b4 you can use this but same message as for the below one
 SPOTIPY_CLIENT_SECRET="<your spotify client secret here>"#c50c167cbf854a79b3013f75fa3fe912  you can use this one but this may be restricted by spotify so try getting yours first.
 SPOTIFY_USER_ID="<your spotify user id here>"
