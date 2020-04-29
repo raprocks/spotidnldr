@@ -7,13 +7,13 @@ import os
 from tag_embedder import tag_embed
 import downloader
 from converter import convert_to_mp3
-#from env_setup import *
-#from env_checker import *
+from env_setup import *
+from env_checker import *
 
-
-#check_for_env_vars()
+check_for_env_vars()
 class spotr:
-    def __init__(self, userid=os.environ["SPOTIFY_USER_ID"]):
+    def __init__(self, userid=SPOTIFY_USER_ID):
+        print("hello there, ", SPOTIFY_USER_ID)
         try:
             local_token = util.prompt_for_user_token(username=userid)
             self.spotify = spotipy.Spotify(auth=local_token)
