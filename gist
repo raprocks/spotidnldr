@@ -1,0 +1,18 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+URL=$1
+clear
+echo "you just shared a url to termux"
+export PATH=$PATH:"$HOME/spotidnldr"
+
+if [[ $URL == *"open.spotify.com"*]]; then
+	SONG_DIR="/storage/emulated/0/Songs"
+	PYTHON=$(which python)
+
+	if [[ ! -d $SONG_DIR ]]; then
+		mkdir $SONG_DIR
+	fi
+	
+	cd $HOME/spotidnldr
+	
+	$PYTHON spot.py
