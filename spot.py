@@ -7,15 +7,18 @@ import os
 from tag_embedder import tag_embed
 import downloader
 from converter import convert_to_mp3
+#from env_setup import *
+#from env_checker import *
 
+
+#check_for_env_vars()
 class spotr:
     def __init__(self, userid=os.environ["SPOTIFY_USER_ID"]):
         try:
-            local_token = util.prompt_for_user_token(userid)
-        except:
+            local_token = util.prompt_for_user_token(username=userid)
+            self.spotify = spotipy.Spotify(auth=local_token)
+        except UnboundLocalError as err:
             print("Something seems wrong :( \n Have you set up all of the Enviornment Variables and given your username as input?")
-        self.spotify = spotipy.Spotify(auth=local_token)
-
     def get_userid_from_url(self, url):
         url = str(url)
         url = url.split('/')
@@ -124,6 +127,7 @@ if __name__=="__main__":
     #print(json.dumps(res, indent=3))
     #print(len(res))
     for each in res:
+        os.system("youtube-dl --rm-cache-dir")
         album_cover_url = each["album_data"]["album_cover"]
         name = each["track_data"]["name"]+ " - " + str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
         title = each["track_data"]["name"]
@@ -136,8 +140,8 @@ if __name__=="__main__":
         if "/" in name:
             name = name.replace("/\\","" )
         img_name = dl_jpg(album_cover_url, "./", name)
-        retrived_from_youtube=youtube().search(query=name,order="relevance", limit=10)
-        infile = downloader.download(url=retrived_from_youtube, file_name=name)
+        retrived_from_youtube=youtube().search(query=name,order="relevance", limit=10, return_indices=3)
+        infile = downloader.download(url=retrived_from_youtube[0], file_name=name)
         convert_to_mp3(infile, f"./{name}.mp3")
         tag_embed(f"{name}.mp3", title=title, artists=song_artists, album=album_name, album_artists=album_artists, release_date=release_date, track_number=track_number, total_tracks=total_tracks, img_path=img_name)
         os.remove(img_name)
