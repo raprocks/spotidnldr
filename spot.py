@@ -15,7 +15,7 @@ class spotr:
     def __init__(self, userid=SPOTIFY_USER_ID):
         print("hello there, ", SPOTIFY_USER_ID)
         try:
-            local_token = util.prompt_for_user_token(username=userid)
+            local_token = util.prompt_for_user_token(username=userid,client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET, redirect_uri=SPOTIPY_REDIRECT_URI)
             self.spotify = spotipy.Spotify(auth=local_token)
         except UnboundLocalError as err:
             print("Something seems wrong :( \n Have you set up all of the Enviornment Variables and given your username as input?")
