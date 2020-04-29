@@ -11,7 +11,7 @@ class YDL():
 #YDL(opts=opts).downloader(["https://youtu.be/FM7MFYoylVs"])
 
 def download(url, file_name):
-    opts = {'format':'bestaudio', 'outtmpl':f"{file_name}.%(ext)s", 'forcefilename':True, "quiet":True}
+    opts = {'format':'bestaudio', 'outtmpl':f"{file_name}.%(ext)s", "quiet":True}
     YDL(opts=opts).downloader(url)
     return f"{file_name}.webm"
 
