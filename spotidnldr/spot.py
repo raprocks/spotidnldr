@@ -1,16 +1,15 @@
 import spotipy
 import spotipy.util as util
 import json
-from spotidnldr.cover_download import dl_jpg
-from youtube_search import youtube
 import os
-from tag_embedder import tag_embed
-import downloader
-from converter import convert_to_mp3
-from env_setup import *
-from env_checker import *
+from spotidnldr.cover_download import dl_jpg
+from spotidnldr.youtube_search import youtube
+from spotidnldr.tag_embedder import tag_embed
+import spotidnldr.downloader
+from spotidnldr.converter import convert_to_mp3
+from spotidnldr.env_setup import *
+from spotidnldr.env_checker import *
 
-check_for_env_vars()
 class spotr:
     def __init__(self, userid=SPOTIFY_USER_ID):
         print("hello there, ", SPOTIFY_USER_ID)
@@ -123,6 +122,8 @@ class spotr:
         return return_dict
 
 if __name__=="__main__":
+    local=locals()
+    check_for_env_vars(a=local, env=os.environ)
     res = spotr().get_song_info(input("input url to dnld🙏🙏 >>> "))
     #print(json.dumps(res, indent=3))
     #print(len(res))
