@@ -12,7 +12,9 @@ if [[ $URL == *"open.spotify.com"*]]; then
 	if [[ ! -d $SONG_DIR ]]; then
 		mkdir $SONG_DIR
 	fi
+
+	spoti --url $URL
 	
-	cd $HOME/spotidnldr
+fi
 	
 	$PYTHON spot.py
