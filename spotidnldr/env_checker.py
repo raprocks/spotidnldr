@@ -8,7 +8,8 @@ def check_for_env_vars(a, env):
     for var in env_list:
         if var in current_envs:
             print(f"{var} is set in environment.Replacing.")
-            local_vars[var]=current_envs[var]
+            locals()[var]=current_envs[var]
+            local_vars=locals()
             print(local_vars[var])
         elif var in local_vars:
             print(f"{var} is set in env_vars.py")
