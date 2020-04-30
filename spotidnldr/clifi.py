@@ -1,7 +1,7 @@
 import click
 import os
 from spotidnldr.spot import *
-from spotidnldr import *
+from spotidnldr.env_setup import *
 from spotidnldr.cover_download import *
 from spotidnldr.youtube_search import *
 from spotidnldr.downloader import *
