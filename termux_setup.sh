@@ -1,5 +1,5 @@
-#pkg update
-#pkg upgrade -y
+pkg update
+pkg upgrade -y
 #set storage permissions
 echo "Please allow to provide access to internal storage"
 termux-setup-storage
