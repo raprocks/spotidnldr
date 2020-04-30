@@ -22,10 +22,12 @@ fi
 echo "Getting Spotidnldr"
 git clone https://github.com/raprocks/spotidnldr.git $HOME/spotidnldr
 # traverse into directory
-cd spotidnldr
+cd $HOME/spotidnldr
 #opening api key setup script to edit
-micro env_setup.py
+micro ./spotidnldr/env_setup.py
 
-echo " You are good to go now just share your spotify link to termux from spotify and the song will be downloaded to the folder named Songs in Internal Memory"
+pip install .
+
+echo " You are good to go now just share your spotify link to termux from spotify and the song will be downloaded to the folder named Songs in Internal Memory OR use ```spoti --help```"
 
 exit 0
