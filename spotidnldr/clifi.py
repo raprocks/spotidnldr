@@ -1,5 +1,4 @@
 import click
-from spotidnldr.env_checker import *
 from spotidnldr.spot import *
 from spotidnldr import *
 from spotidnldr.cover_download import *
