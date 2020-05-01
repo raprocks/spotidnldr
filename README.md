@@ -2,6 +2,13 @@
 ### What is it?
 A terminal based application written in Python-3, which helps you download songs in MP3 format, with meta-data like artist information and album-arts just like on Spotify.
 ### Installation
+### For Termux on Android
+I made this whole thing in Termux only. So i should give back to it. 
+So to install in termux just copy below command and paste it but first read the getting the api keys section and obviously get the api keys.
+```bash
+curl https://raw.githubusercontent.com/raprocks/spotidnldr/master/termux_setup.sh >> "term.sh" && bash term.sh
+```
+You are good to go now.
 #### Getting the Files
 Just clone the git repo using 
 ```
@@ -124,9 +131,9 @@ python spot.py
 * Termux.
 
 ### To Do List
-- [ ] Make this into a cli application using Click.
+- [x] Make this into a cli application using Click.
 - [ ] try to complete your suggestions and squash the bugs.
-
+- [ ] make a interface
 Leave a Star if you think i deserve it 😉. Also Checkout [F8L](https://open.spotify.com/artist/6LkOho0r5aIaYkMtjWYDAz?si=O6FR6i9UT1WMpG7bYEBMpg) on spotify.
 # Thanks
 ###### ~ Rohit.
