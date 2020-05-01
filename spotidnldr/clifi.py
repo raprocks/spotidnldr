@@ -44,7 +44,7 @@ def download(url,output):
         if "/" in name:
             name = name.replace("/\\","" )
         if ".temp" not in os.listdir():
-            os.path.mkdir(".temp")
+            os.mkdir(".temp")
         img_name = dl_jpg(album_cover_url, "./.temp/", name)
         retrived_from_youtube=youtube().search(query=name,order="relevance", limit=10, return_indices=3)
         infile = download_yout(url=retrived_from_youtube[0], file_name=name)
