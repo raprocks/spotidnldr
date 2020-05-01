@@ -5,9 +5,8 @@ clear
 echo "you just shared a url to termux"
 export PATH=$PATH:"$HOME/spotidnldr"
 
-if [[ $URL == *"open.spotify.com"*]]; then
+if [[ $URL == *"open.spotify.com"* ]]; then
 	SONG_DIR="/storage/emulated/0/Songs"
-	PYTHON=$(which python)
 
 	if [[ ! -d $SONG_DIR ]]; then
 		mkdir $SONG_DIR
@@ -16,5 +15,5 @@ if [[ $URL == *"open.spotify.com"*]]; then
 	spoti --url $URL
 	
 fi
-	
-	$PYTHON spot.py
+
+echo "done"
