@@ -12,7 +12,7 @@ if [ ! -d "$HOME/bin" ]; then
 fi
 # get gist, put it in termux url opener and set it as executable
 curl 'https://raw.githubusercontent.com/raprocks/spotidnldr/master/gist' > "$HOME/bin/termux-url-opener.sh"
-chmod +x termux-url-opener.sh
+chmod +x $HOME/bin/termux-url-opener.sh
 #make a directory to store songs into
 if [ ! -d "/storage/emulated/0/Songs" ]; then
 	mkdir "/storage/emulated/0/Songs"
