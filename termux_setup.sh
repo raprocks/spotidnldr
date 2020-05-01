@@ -10,9 +10,12 @@ pkg install -y ffmpeg python git micro
 if [ ! -d "$HOME/bin" ]; then
 	mkdir "$HOME/bin"
 fi
+
+touch $HOME/bin/termux-url-opener
 # get gist, put it in termux url opener and set it as executable
-curl 'https://raw.githubusercontent.com/raprocks/spotidnldr/master/gist' > "$HOME/bin/termux-url-opener.sh"
-chmod +x $HOME/bin/termux-url-opener.sh
+curl 'https://raw.githubusercontent.com/raprocks/spotidnldr/master/gist' > "$HOME/bin/termux-url-opener"
+
+chmod +x $HOME/bin/termux-url-opener
 #make a directory to store songs into
 if [ ! -d "/storage/emulated/0/Songs" ]; then
 	mkdir "/storage/emulated/0/Songs"
