@@ -1,7 +1,7 @@
 import click
 import os
 from spotidnldr.spot import *
-from spotidnldr.env_setup import *
+import spotidnldr.env_setup as e
 from spotidnldr.cover_download import *
 from spotidnldr.youtube_search import *
 from spotidnldr.downloader import *
@@ -12,24 +12,11 @@ from spotidnldr.converter import *
 @click.option('-o', "--output", help="provide a output path for the song explicitly", default="/storage/emulated/0/Songs/")
 @click.option("--url", prompt="enter Url of spotify song", help="The flag which directly sets the url instead of a prompt. if not used the program will prompt you for a url", required=True, type=str)
 def download(url,output):
-    env_list = ["SPOTIPY_CLIENT_ID", "SPOTIPY_CLIENT_SECRET", "SPOTIFY_USER_ID", "SPOTIPY_REDIRECT_URI", "YOUTUBE_API_KEY"]
-    local_vars=locals()
-    current_envs=os.environ
-    for var in env_list:
-        if var in current_envs:
-            print(f"{var} is set in environment.Replacing.")
-            locals()[var]=current_envs[var]
-            local_vars=locals()
-            print(local_vars[var])
-        elif var in local_vars:
-            print(f"{var} is set in env_vars.py")
-        else:
-            print(f"{var} is not set")
-    userid=locals()["SPOTIFY_USER_ID"]
-    clientid=locals()["SPOTIPY_CLIENT_ID"]
-    clientsecret=locals()["SPOTIPY_CLIENT_SECRET"]
-    redirecturi=locals()["SPOTIPY_REDIRECT_URI"]
-    youtu_key=locals()["YOUTUBE_API_KEY"]
+    userid=e.SPOTIFY_USER_ID
+    clientid=e.SPOTIPY_CLIENT_ID
+    clientsecret=e.SPOTIPY_CLIENT_SECRET
+    redirecturi=e.SPOTIPY_REDIRECT_URI
+    youtu_key=e.YOUTUBE_API_KEY
     res = spotr(userid=userid, clientid=clientid, clientsecret=clientsecret, redirecturi=redirecturi).get_song_info(url)
     for each in res:
         os.system("youtube-dl --rm-cache-dir")
