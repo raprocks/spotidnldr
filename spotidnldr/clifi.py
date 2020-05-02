@@ -13,12 +13,10 @@ from spotidnldr.converter import *
 @click.option('-o', "--output", help="provide a output path for the song explicitly", default="/storage/emulated/0/Songs/")
 @click.option("--url", prompt="enter Url of spotify song", help="The flag which directly sets the url instead of a prompt. if not used the program will prompt you for a url", required=True, type=str)
 def download(url,output,verbose):
-    userid=e.SPOTIFY_USER_ID
     clientid=e.SPOTIPY_CLIENT_ID
     clientsecret=e.SPOTIPY_CLIENT_SECRET
-    redirecturi=e.SPOTIPY_REDIRECT_URI
     youtu_key=e.YOUTUBE_API_KEY
-    res = spotr(userid=userid, clientid=clientid, clientsecret=clientsecret, redirecturi=redirecturi).get_song_info(url)
+    res = spotr(clientid=clientid, clientsecret=clientsecret).get_song_info(url)
     for each in res:
         os.system("youtube-dl --rm-cache-dir")
         album_cover_url = each["album_data"]["album_cover"]

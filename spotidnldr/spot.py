@@ -1,12 +1,12 @@
 import spotipy
-import spotipy.util as util
+from spotipy.oauth2 import SpotifyClientCredentials
 
 class spotr:
-    def __init__(self, userid, clientid, clientsecret, redirecturi):
+    def __init__(self,clientid, clientsecret):
         print("hello there, ", userid)
         try:
-            local_token = util.prompt_for_user_token(username=userid,client_id=clientid, client_secret=clientsecret, redirect_uri=redirecturi)
-            self.spotify = spotipy.Spotify(auth=local_token)
+            local_token = SpotifyClientCredentials(client_id=clientid, client_secret=clientsecret)
+            self.spotify = spotipy.Spotify(client_credentials_manager=local_token)
         except UnboundLocalError as err:
             print("Something seems wrong :( \n Have you set up all of the Enviornment Variables and given your username as input?")
     def get_userid_from_url(self, url):
