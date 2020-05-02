@@ -3,7 +3,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 class spotr:
     def __init__(self,clientid, clientsecret):
-        print("hello there, ", userid)
+        print("hello there")
         try:
             local_token = SpotifyClientCredentials(client_id=clientid, client_secret=clientsecret)
             self.spotify = spotipy.Spotify(client_credentials_manager=local_token)
