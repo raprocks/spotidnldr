@@ -3,7 +3,7 @@
 URL=$1
 clear
 echo "you just shared a url to termux"
-export PATH=$PATH:"$HOME/spotidnldr"
+export BROWSER='termux-open-url'
 
 if [[ $URL == *"open.spotify.com"* ]]; then
 	SONG_DIR="/storage/emulated/0/Songs"
@@ -12,7 +12,7 @@ if [[ $URL == *"open.spotify.com"* ]]; then
 		mkdir $SONG_DIR
 	fi
 
-	spoti --url $URL
+	spoti --url $URL 
 	
 fi
 
