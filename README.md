@@ -17,7 +17,7 @@ git clone https://github.com/raprocks/spotidnldr.git spotidnldr
 
 Then change your working directory to the newly made folder named spotidnldr
 ```
-cd spotidnldr
+cd ./spotidnldr/spotidnldr/
 ```
 Now check that there is a file named env_setup.py, open it in any file editor you want and paste the key you obtain by following [these steps](https://github.com/raprocks/spotidnldr/blob/master/README.md#getting-youtube-api-keys-) in the placeholder for youtube api key.
 
