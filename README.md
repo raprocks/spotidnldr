@@ -1,9 +1,9 @@
 # Spotidnldr
 ### What is it?
-A terminal based application written in Python-3, which helps you download songs in MP3 format, with meta-data like artist information and album-arts just like on Spotify.
+A terminal based application written in Python3, which helps you download songs in MP3 format, with meta-data like artist information and album-arts just like on Spotify.
 ### Installation
 ### For Termux on Android
-I made this whole thing in Termux only. So i should give back to it. 
+I made this whole thing in termux only, So I should give back to it. 
 So to install in termux just copy below command and paste it but first read the getting the api keys section and obviously get the api keys.
 ```bash
 curl https://raw.githubusercontent.com/raprocks/spotidnldr/master/termux_setup.sh >> "term.sh" && bash term.sh
@@ -17,9 +17,9 @@ git clone https://github.com/raprocks/spotidnldr.git spotidnldr
 
 Then change your working directory to the newly made folder named spotidnldr
 ```
-cd ./spotidnldr/spotidnldr
+cd spotidnldr
 ```
-Now check that there is a file named env_setup.py, open it in any file editor you want and paste the key you obtain by Following [these steps](https://github.com/raprocks/spotidnldr/blob/master/README.md#getting-youtube-api-keys-) in the placeholder for youtube api key.
+Now check that there is a file named env_setup.py, open it in any file editor you want and paste the key you obtain by following [these steps](https://github.com/raprocks/spotidnldr/blob/master/README.md#getting-youtube-api-keys-) in the placeholder for youtube api key.
 
 Then assuming you have python3 and pip installed and in you Environment Path, Run the Following Command:
 ```
@@ -64,7 +64,7 @@ Next, You need to set some Environment Variables on your system because you don'
 4. Now you have enables access of FFMPEG from python. 
 ##### For Linux.
 1. Follow this guide [here](https://www.tecmint.com/install-ffmpeg-in-linux). 
-2. Done.✌️👌
+2. Done.
 
 ### Usage
 * Just run the program by doing.
@@ -76,8 +76,8 @@ Anywhere!
 * Access help for program by doing ``` spoti --help ```.
 
 # Credits
-* ME(obviously) - did everything on my phone.Not kidding.its Hard.
-* All the respective devs of pypi packages. All Gawds 🙏🙏.
+* ME(obviously) - did everything on my phone. Not kidding, it's Hard.
+* All the respective devs of pypi packages. All Gawds.
 * @SwapnilSoni1999 
 * Termux.
 
@@ -85,6 +85,6 @@ Anywhere!
 - [x] Make this into a cli application using Click.
 - [ ] try to complete your suggestions and squash the bugs.
 - [ ] make a interface.
-Leave a Star if you think i deserve it 😉. Also Checkout [F8L](https://open.spotify.com/artist/6LkOho0r5aIaYkMtjWYDAz?si=O6FR6i9UT1WMpG7bYEBMpg) on spotify.
+Leave a Star if you think I deserve it. Also Checkout [F8L](https://open.spotify.com/artist/6LkOho0r5aIaYkMtjWYDAz?si=O6FR6i9UT1WMpG7bYEBMpg) on spotify.
 # Thanks
 ###### ~ Rohit.
