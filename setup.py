@@ -7,7 +7,7 @@ with open("README.md", 'r+') as f:
 
 setuptools.setup(
     name="spotidnldr", # Replace with your own username
-    version="0.1b1",
+    version="1.0.0",
     author="Rohit Patil",
     author_email="rahulhimesh09@gmail.com",
     description="the spotify song downloader",
@@ -27,7 +27,7 @@ setuptools.setup(
     classifiers=[
         "Natural Language :: English",
         "Programming Language :: Python :: 3 :: Only",
-        "License :: OSI Approved :: MIT License",
+        "License :: GPL-3.0-or-later",
         "Operating System :: OS Independent",
     ],
     entry_points='''
