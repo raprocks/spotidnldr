@@ -5,7 +5,10 @@ echo "Please allow to provide access to internal storage"
 termux-setup-storage
 #get packages
 echo "Installing needed packages for Termux ...."
-pkg install -y ffmpeg python git micro
+pkg install -y ffmpeg python git
+if [ -d "$HOME/spotidnldr" ]; then
+	rm -r $HOME/spotidnldr
+fi
 #make bin if not present
 if [ ! -d "$HOME/bin" ]; then
 	mkdir "$HOME/bin"
