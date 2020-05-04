@@ -79,12 +79,13 @@ Anywhere!
 * ME(obviously) - did everything on my phone. Not kidding, it's Hard.
 * All the respective devs of pypi packages. All Gawds.
 * @SwapnilSoni1999 
+* @AyamDobhal saar for fixing readme.
 * Termux.
 
 ### To Do List
 - [x] Make this into a cli application using Click.
 - [ ] try to complete your suggestions and squash the bugs.
 - [ ] make a interface.
-Leave a Star if you think I deserve it. Also Checkout [F8L](https://open.spotify.com/artist/6LkOho0r5aIaYkMtjWYDAz?si=O6FR6i9UT1WMpG7bYEBMpg) on spotify.
+* Leave a Star if you think I deserve it. Also Checkout [F8L](https://open.spotify.com/artist/6LkOho0r5aIaYkMtjWYDAz?si=O6FR6i9UT1WMpG7bYEBMpg) on spotify.
 # Thanks
 ###### ~ Rohit.
