@@ -22,6 +22,7 @@ setuptools.setup(
         "requests",
         "click",
         "ffmpeg-python",
+        "ytmusicapi",
     ],
     classifiers=[
         "Natural Language :: English",
