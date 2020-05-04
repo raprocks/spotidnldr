@@ -36,7 +36,7 @@ def download(url,output,verbose):
         if ".temp" not in os.listdir():
             os.mkdir(".temp")
         img_name = dl_jpg(album_cover_url, "./.temp/", name)
-        retrived_from_youtube=youtube(key=youtu_key).search(query=name,order="relevance", limit=10, return_indices=3)
+        retrived_from_youtube=youtube_search(q=name,return_indices=3)
         infile = download_yout(url=retrived_from_youtube[0], file_name=name)
         convert_to_mp3(infile, os.path.join(output,f"{name}.mp3"), verbose)
         tag_embed(os.path.join(output,f"{name}.mp3"), title=title, artists=song_artists, album=album_name, album_artists=album_artists, release_date=release_date, track_number=track_number, total_tracks=total_tracks, img_path=img_name)
