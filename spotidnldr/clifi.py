@@ -15,7 +15,6 @@ from spotidnldr.converter import *
 def download(url,output,verbose):
     clientid=e.SPOTIPY_CLIENT_ID
     clientsecret=e.SPOTIPY_CLIENT_SECRET
-    youtu_key=e.YOUTUBE_API_KEY
     res = spotr(clientid=clientid, clientsecret=clientsecret).get_song_info(url)
     for each in res:
         os.system("youtube-dl --rm-cache-dir")
