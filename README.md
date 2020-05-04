@@ -20,8 +20,8 @@ Then change your working directory to the newly made folder named spotidnldr
 cd ./spotidnldr/spotidnldr/
 ```
 Now check that there is a file named env_setup.py, open it in any file editor you want and paste the key you obtain by following [these steps](https://github.com/raprocks/spotidnldr/blob/master/README.md#getting-youtube-api-keys-) in the placeholder for youtube api key.
-
-Then assuming you have python3 and pip installed and in you Environment Path, Run the Following Command:
+Save the file and then go back one directory to the parent directory.
+When you are in ```./spotidnldr``` and assuming you have python3 and pip installed and in you Environment Path, Run the Following Command:
 ```
 pip install .
 ```
