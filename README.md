@@ -4,31 +4,31 @@ A terminal based application written in Python3, which helps you download songs 
 ### Installation
 ### For Termux on Android
 I made this whole thing in termux only, So I should give back to it. 
-So to install in termux just copy below command and paste it but first read the getting the api keys section and obviously get the api keys.
+So to install in termux just copy below command, paste it and press enter.
 ```bash
 curl https://raw.githubusercontent.com/raprocks/spotidnldr/master/termux_setup.sh >> "term.sh" && bash term.sh
 ```
 You are good to go now.
 #### Getting the Files
-Just clone the git repo using 
-```
-git clone https://github.com/raprocks/spotidnldr.git spotidnldr
-```
+* For Linux
+  * Just clone the git repo using 
+    * ```bash
+      git clone https://github.com/raprocks/spotidnldr.git spotidnldr
+      ```
 
-Then change your working directory to the newly made folder named spotidnldr 
-* for Linux
-		```bash
-		cd ./spotidnldr
-		```
-When you are in ```./spotidnldr``` folder and assuming you have python3 and pip installed and in you Environment Path, Run the Following Command:
-		```bash
-		pip install .
-		```
+  * Then change your working directory to the newly made folder named spotidnldr 
+    * ```bash
+      cd ./spotidnldr
+      ```
+  * When you are in ```./spotidnldr``` folder and assuming you have python3 and pip installed and in you Environment Path, Run the Following Command:
+      * ```bash
+         pip install .
+        ```
 * for windows
 	* just download the zip of the repo and unzip it.
 	* just double click on ```setup.py```
 	* Done!
-* This installs the required packages from Pypi repo.
+###### This installs the required packages from Pypi repo.
   * spotipy - The python wrapper for Spotify's Web API.
   * requests - The HTTP library used to get data from Youtube.
   * youtube-dl - The awesome masterpiece to get audio files.
@@ -38,10 +38,6 @@ When you are in ```./spotidnldr``` folder and assuming you have python3 and pip 
   * ytmusicapi - the module which retrives youtube links of songs.
 
 You will probably need the root user permissions if you are on a linux system or Mac. Just add **sudo** at the begining of the command and it should work without any issues.
-
-Next, You need to set some Environment Variables on your system because you don't want to type gibberish in everytime you run the program.
-
-**But**, This gibberish helps you contact the Youtube API to get data about the Songs you want to Download.
 
 ### now all you need after this is FFMPEG.
 ##### For Windows.

@@ -26,8 +26,6 @@ echo "Getting Spotidnldr"
 git clone https://github.com/raprocks/spotidnldr.git $HOME/spotidnldr
 # traverse into directory
 cd $HOME/spotidnldr
-#opening api key setup script to edit
-micro ./spotidnldr/env_setup.py
 
 pip install .
 
