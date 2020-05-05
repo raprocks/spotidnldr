@@ -7,7 +7,7 @@ termux-setup-storage
 echo "Installing needed packages for Termux ...."
 pkg install -y ffmpeg python git
 if [ -d "$HOME/spotidnldr" ]; then
-	rm -r $HOME/spotidnldr
+	rm -rf $HOME/spotidnldr
 fi
 #make bin if not present
 if [ ! -d "$HOME/bin" ]; then
