@@ -28,6 +28,7 @@ def download(url,output,verbose):
         total_tracks = each["album_data"]["total_tracks"]
         release_date = each["album_data"]["album_release_date"]
         if "/" in name:
+            name = name.replace('/', "")
             name = name.replace("/\\","" )
         if f"{name}.mp3" in str(os.listdir(output)):
             print(f"a file named {name} already in {output} , not downloading it")
