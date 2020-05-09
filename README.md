@@ -62,7 +62,8 @@ Anywhere!
 * ME(obviously) - did everything on my phone. Not kidding, it's Hard.
 * All the respective devs of pypi packages. All Gawds.
 * @SwapnilSoni1999 
-* @AyamDobhal saar for fixing readme.
+* @AyamDobhal sir for fixing readme.
+* @Sharvil234 sir for hard testing.
 * Termux.
 
 ### To Do List
