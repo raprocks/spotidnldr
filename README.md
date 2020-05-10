@@ -61,7 +61,7 @@ Anywhere!
 # Credits
 * ME(obviously) - did everything on my phone. Not kidding, it's Hard.
 * All the respective devs of pypi packages. All Gawds.
-* @SwapnilSoni1999 
+* @SwapnilSoni1999 sir for making me do this(?).
 * @AyamDobhal sir for fixing readme.
 * @Sharvil234 sir for hard testing.
 * Termux.
@@ -72,4 +72,4 @@ Anywhere!
 - [ ] make a interface.
 * Leave a Star if you think I deserve it. Also Checkout [F8L](https://open.spotify.com/artist/6LkOho0r5aIaYkMtjWYDAz?si=O6FR6i9UT1WMpG7bYEBMpg) on spotify.
 # Thanks
-###### ~ Rohit.
+###### > ~ Rohit.
