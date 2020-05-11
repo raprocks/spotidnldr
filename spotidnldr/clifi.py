@@ -8,8 +8,9 @@ from spotidnldr.downloader import *
 from spotidnldr.tag_embedder import *
 from spotidnldr.converter import *
 
+
 @click.command()
-@click.option('-v','--verbose', is_flag=True, help="flag for verbosity, usage of this flag gives more output use this for sending or finding errors")
+@click.option('-v','--verbose', is_flag=True, default=True, help="flag for verbosity, usage of this flag gives more output use this for sending or finding errors")
 @click.option('-o', "--output", help="provide a output path for the song explicitly", default="/storage/emulated/0/Songs/")
 @click.option("--url", prompt="enter Url of spotify song", help="The flag which directly sets the url instead of a prompt. if not used the program will prompt you for a url", required=True, type=str)
 def download(url,output,verbose):
