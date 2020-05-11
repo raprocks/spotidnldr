@@ -4,13 +4,13 @@ from pathlib import Path
 
 def dl_jpg(url, file_path, file_name):
     name = file_name
-    print(url, file_path, name)
-    while True:
-        if "/" in name:
-            file_name = name.replace("/","|")
-        elif "\\" in name:
-            file_name = name.replace("\\", "")
-        break
+    #print(url, file_path, name)
+    if "/" in name:
+        file_name = name.replace("/","|")
+    elif "\\" in name:
+        file_name = name.replace("\\", "")
+    else:
+        pass
         
     full_path = Path(os.path.join(file_path,str(file_name + '.jpg')))
     urllib.request.urlretrieve(url, full_path)
