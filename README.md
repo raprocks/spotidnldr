@@ -1,4 +1,4 @@
-![spotidnldr - The Spotify Song Downloader](https://www.github.com/raprocks/spotidnldr/cover.jpg)
+![spotidnldr - The Spotify Song Downloader](https://github.com/raprocks/spotidnldr/blob/master/cover.jpg)
 # Spotidnldr
 ### What is it?
 A terminal based application written in Python3, which helps you download songs in MP3 format, with meta-data like artist information and album-arts just like on Spotify.
