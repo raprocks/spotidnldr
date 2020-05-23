@@ -6,3 +6,5 @@ spotidnldr/.temp/
 spotidnldr/__pycache__/
 spotidnldr/genius_lyrixer.py
 web.py
+dist
+spotidnldr.egg-info/
