@@ -11,6 +11,7 @@ setuptools.setup(
     author="Rohit Patil",
     author_email="rahulhimesh09@gmail.com",
     description="the spotify song downloader",
+    download_url='https://github.com/raprocks/spotidnldr/archive/v1.0.tar.gz',
     long_description = long_de,
     long_description_content_type="text/markdown",
     url="https://github.com/raprocks/spotindnldr",
