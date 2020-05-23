@@ -28,7 +28,7 @@ setuptools.setup(
     classifiers=[
         "Natural Language :: English",
         "Programming Language :: Python :: 3 :: Only",
-        "License :: GPL-3.0-or-later",
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)","
         "Operating System :: OS Independent",
     ],
     entry_points='''
