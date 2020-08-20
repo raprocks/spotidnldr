@@ -18,7 +18,7 @@ setuptools.setup(
     packages=["spotidnldr",],
     install_requires=[
         "spotipy",
-        "youtube-dl",
+        "pytubeX",
         "eyeD3",
         "requests",
         "click",

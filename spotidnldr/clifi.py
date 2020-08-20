@@ -4,7 +4,7 @@ from spotidnldr.spot import spotr
 import spotidnldr.env_setup as e
 from spotidnldr.cover_download import dl_jpg
 from spotidnldr.youtube_search import youtube_search
-from spotidnldr.downloader import download_yout
+from spotidnldr.downloader import YDL
 from spotidnldr.tag_embedder import tag_embed
 from spotidnldr.converter import convert_to_mp3
 
@@ -29,9 +29,10 @@ def download(url, output, verbose):
     clientsecret = e.SPOTIPY_CLIENT_SECRET
     res = spotr(clientid=clientid, clientsecret=clientsecret).get_song_info(url)
     for each in res:
-        os.system("youtube-dl --rm-cache-dir")
         album_cover_url = each["album_data"]["album_cover"]
-        name = each["track_data"]["name"]+ " - " + str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
+        name = each["track_data"]["name"] + \
+                " - " + \
+                str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
         title = each["track_data"]["name"]
         song_artists = str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
         album_name = each["album_data"]["name"]
@@ -41,15 +42,15 @@ def download(url, output, verbose):
         release_date = each["album_data"]["album_release_date"]
         if "/" in name:
             name = name.replace('/', "")
-            name = name.replace("/\\", "" )
+            name = name.replace("/\\", "")
         if f"{name}.mp3" in str(os.listdir(output)):
             print(f"a file named {name} already in {output} , not downloading it")
             continue
         if ".temp" not in os.listdir():
             os.mkdir(".temp")
         img_name = dl_jpg(album_cover_url, "./.temp/", name)
-        retrived_from_youtube=youtube_search(q=name, return_indices=3)
-        infile = download_yout(url=retrived_from_youtube[0], file_name=name)
+        retrived_from_youtube = youtube_search(q=name, return_indices=3)
+        infile = YDL(retrived_from_youtube[0]).downloader(filename=name)
         convert_to_mp3(infile, os.path.join(output, f"{name}.mp3"), verbose)
         tag_embed(os.path.join(output, f"{name}.mp3"),
                   title=title, artists=song_artists,
