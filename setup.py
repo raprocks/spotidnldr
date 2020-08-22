@@ -15,6 +15,7 @@ setuptools.setup(
     long_description = long_de,
     long_description_content_type="text/markdown",
     url="https://github.com/raprocks/spotindnldr",
+    license='GPLv3+',
     packages=["spotidnldr",],
     install_requires=[
         "spotipy",
