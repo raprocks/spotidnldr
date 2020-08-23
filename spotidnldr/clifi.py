@@ -13,17 +13,20 @@ from spotidnldr.converter import convert_to_mp3
 @click.option('-v','--verbose',
               is_flag=True,
               default=True,
-              help="flag for verbosity, usage of this flag gives more output use this for sending or finding errors")
+              help="flag for verbosity, usage of this flag gives more output use this for sending or finding errors.")
 @click.option('-o', "--output",
-              help="provide a output path for the song explicitly",
+              help="provide a output path for the song explicitly.",
               default="./",
               type=click.Path(),
-              show_default=True)
+              show_default=True,
+              envvar="SPOTIFY_DOWNLOAD_PATH"
+              )
 @click.option("--url",
               prompt="enter Url of spotify song",
-              help="The flag which directly sets the url instead of a prompt. if not used the program will prompt you for a url",
+              help="The flag which directly sets the url instead of a prompt. if not used the program will prompt you for a url.",
               required=True,
               type=str)
+@click.version_option(version='v1.2.0', prog_name='spotidnldr')
 def download(url, output, verbose):
     clientid = e.SPOTIPY_CLIENT_ID
     clientsecret = e.SPOTIPY_CLIENT_SECRET
@@ -63,3 +66,4 @@ def download(url, output, verbose):
         os.remove(img_name)
         os.remove(infile)
         print("done", name)
+
