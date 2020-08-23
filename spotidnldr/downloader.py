@@ -1,10 +1,11 @@
-from __future__ import unicode_literals
-from pytube import YouTube
 import os
+from pytube import YouTube
+from spotidnldr.progress_bar import download_progress_bar
 
 class YDL():
     def __init__(self, vid_link):
         self.ydl = YouTube(vid_link)
+        self.ydl.register_on_progress_callback(download_progress_bar)
         self.best_audio = (self.ydl
                            .streams
                            .filter(only_audio=True)
