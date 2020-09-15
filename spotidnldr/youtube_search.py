@@ -2,6 +2,8 @@ from ytmusicapi import YTMusic
 
 
 def youtube_search(q, return_indices, filters="songs", recurse_count=0):
+    print(
+        f'[*] searching {q} recursively, current recurse count is {recurse_count}')
     if recurse_count == 1:
         try:
             q = q[:q.rindex('-')]
@@ -15,7 +17,8 @@ def youtube_search(q, return_indices, filters="songs", recurse_count=0):
 
     res = YTMusic().search(query=q, filter=filters)
     if filters == 'songs':
-        x = ["https://music.youtube.com/watch?v="+video["videoId"] for video in res]
+        x = ["https://music.youtube.com/watch?v="+video["videoId"]
+             for video in res]
     elif filters == 'videos':
         x = ["https://youtu.be/" + video["videoId"] for video in res]
     titles = [each['title'] for each in res]
@@ -28,17 +31,18 @@ def youtube_search(q, return_indices, filters="songs", recurse_count=0):
         elif each not in titles[0]:
             count += 0
 
-    if (count/total)>0.8:
-        passed = True
-    else:
-        passed = False
+    passed = bool((count/total) > 0.8)
+
     if passed:
         return x[:return_indices]
 
-    elif not passed:
+    if not passed:
         filters = 'videos'
-        x = youtube_search(q, return_indices=return_indices, filters=filters, recurse_count=recurse_count+1)
+        x = youtube_search(q, return_indices=return_indices,
+                           filters=filters, recurse_count=recurse_count+1)
     return x[:return_indices]
+
+
 # https://youtu.be/o1RducJbUdc
 # https://music.youtube.com/watch?v=8_Cw99SiHvc&feature=share
 if __name__ == "__main__":
