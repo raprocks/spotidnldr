@@ -1,12 +1,13 @@
 from time import sleep
 
+
 def download_progress_bar(stream, chunk, bytes_remaining):
     total_size = stream.filesize
     width = 32
     phases = (' ', '▏', '▎', '▍', '▌', '▋', '▊', '▉', '█')
     empty_fill = ' '
     nphases = len(phases)
-    progress = min(1, (total_size - bytes_remaining)/total_size)
+    progress = min(1, (total_size - bytes_remaining) / total_size)
     filled_len = width * progress
     nfull = int(filled_len)                      # Number of full chars
     phase = int((filled_len - nfull) * nphases)  # Phase of last char
@@ -16,9 +17,9 @@ def download_progress_bar(stream, chunk, bytes_remaining):
     empty = empty_fill * max(0, nempty - len(current))
     line = ''.join([prog_bar, current, empty])
 
-
-
-
-
-    to_fill = (((total_size - bytes_remaining)/1024)/1024)
-    print("\rDownloading.. |", line, f"| {to_fill:.2f}/{total_size/1024/1024:.2f}", end='')
+    to_fill = (((total_size - bytes_remaining) / 1024) / 1024)
+    print(
+        "\rDownloading.. |",
+        line,
+        f"| {to_fill:.2f}/{total_size/1024/1024:.2f}",
+        end='')
