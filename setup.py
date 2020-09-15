@@ -17,6 +17,7 @@ setuptools.setup(
     url="https://github.com/raprocks/spotindnldr",
     license='GPLv3+',
     packages=["spotidnldr",],
+    package_data={'spotidnldr':["static/*", "templates/*"]},
     install_requires=[
         "spotipy",
         "pytubeX",
@@ -34,7 +35,7 @@ setuptools.setup(
     ],
     entry_points='''
         [console_scripts]
-        spoti=spotidnldr.clifi:download
+        spoti=spotidnldr.clifi:cli
     ''',
     python_requires='>=3.8',
     include_package_data=True,

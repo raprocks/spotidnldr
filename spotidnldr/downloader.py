@@ -2,6 +2,7 @@ import os
 from pytube import YouTube
 from spotidnldr.progress_bar import download_progress_bar
 
+
 class YDL():
     def __init__(self, vid_link):
         self.ydl = YouTube(vid_link)
@@ -12,9 +13,12 @@ class YDL():
                            .order_by("abr")
                            .last()
                            )
+
     def downloader(self, filename):
-        outfile = self.best_audio.download(output_path='./.temp', filename=filename)
+        outfile = self.best_audio.download(
+            output_path='./.temp', filename=filename)
         return outfile
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     pass
