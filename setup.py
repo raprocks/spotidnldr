@@ -6,18 +6,18 @@ with open("README.md", 'r+') as f:
 
 
 setuptools.setup(
-    name="spotidnldr", # Replace with your own username
-    version="v1.2.0",
+    name="spotidnldr",  # Replace with your own username
+    version="v1.3.0",
     author="Rohit Patil",
     author_email="rahulhimesh09@gmail.com",
     description="the spotify song downloader",
     download_url="https://github.com/raprocks/spotidnldr/archive/v1.0.1.tar.gz",
-    long_description = long_de,
+    long_description=long_de,
     long_description_content_type="text/markdown",
     url="https://github.com/raprocks/spotindnldr",
     license='GPLv3+',
-    packages=["spotidnldr",],
-    package_data={'spotidnldr':["static/*", "templates/*"]},
+    packages=["spotidnldr", ],
+    package_data={'spotidnldr': ["static/*", "templates/*"]},
     install_requires=[
         "spotipy",
         "pytubeX",
@@ -37,6 +37,6 @@ setuptools.setup(
         [console_scripts]
         spoti=spotidnldr.clifi:cli
     ''',
-    python_requires='>=3.8',
+    python_requires='>=3.6',
     include_package_data=True,
 )

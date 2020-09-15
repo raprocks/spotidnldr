@@ -26,7 +26,7 @@ def cli():
 @click.argument("url",
                 required=True,
                 type=str)
-@click.version_option(version='v1.2.0', prog_name='spotidnldr')
+@click.version_option(version='v1.3.0', prog_name='spotidnldr')
 def download(url, output, verbose):
     """
     Downloads Songs from URL.
