@@ -6,6 +6,7 @@ termux-setup-storage
 #get packages
 echo "Installing needed packages for Termux ...."
 pkg install -y ffmpeg python git
+pkg update && pkg upgrade
 if [ -d "$HOME/spotidnldr" ]; then
 	rm -rf $HOME/spotidnldr
 fi
@@ -21,17 +22,24 @@ fi
 #chmod +x $HOME/bin/termux-url-opener
 #make a directory to store songs into
 if [ ! -d "/storage/emulated/0/Songs" ]; then
+    echo "Making Songs Directory in Internal Memory where songs will be saved"
 	mkdir "/storage/emulated/0/Songs"
 fi
 
 #get spotidnldr
 echo "Getting Spotidnldr"
-git clone https://github.com/raprocks/spotidnldr.git $HOME/spotidnldr
+pip install --upgrade spotidnldr
+# git clone https://github.com/raprocks/spotidnldr.git $HOME/spotidnldr
+
 # traverse into directory
-cd $HOME/spotidnldr
+# cd $HOME/spotidnldr
 
-pip install .
+# pip install .
 
-echo "the Song will be downloaded to the folder named Songs in Internal Memory  ```spoti --help```"
+echo "Setting environment variables and adding to bashrc/zshrc"
+echo 'export SPOTIFY_DOWNLOAD_PATH="/storage/emulated/0/Songs/"' >> $HOME/.bashrc
+echo 'export SPOTIFY_DOWNLOAD_PATH="/storage/emulated/0/Songs/"' >> $HOME/.zshrc
+
+echo "the Songs will be downloaded to the folder named Songs in Internal Memory  ```spoti --help```"
 
 exit 0
