@@ -1,5 +1,3 @@
-from time import sleep
-
 
 def download_progress_bar(stream, chunk, bytes_remaining):
     total_size = stream.filesize

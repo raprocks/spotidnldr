@@ -4,7 +4,6 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 class spotr:
     def __init__(self, clientid, clientsecret):
-        #print("hello there")
         try:
             local_token = SpotifyClientCredentials(
                 client_id=clientid, client_secret=clientsecret)
@@ -12,7 +11,8 @@ class spotr:
                 client_credentials_manager=local_token)
         except UnboundLocalError as err:
             print(
-                "Something seems wrong :( \n Have you set up all of the Enviornment Variables and given your username as input?\n",
+                "Something seems wrong :( \n Have you changed any of the \
+                    Enviornment Variables and given your username as input?\n",
                 err)
 
     def get_userid_from_url(self, url):
@@ -35,10 +35,10 @@ class spotr:
             link_id = link_id[0]
         else:
             pass
-        uri = "spotify:" + str(link_type) + ":" + str(link_id)
         return [link_type, link_id]
 
     def get_song_info(self, url):
+        return_dict = []
         characteristics = self.get_characteristics(str(url))
         if characteristics[0] == 'track':
             results = self.spotify.track(characteristics[1])
@@ -56,17 +56,18 @@ class spotr:
             track_number = results["track_number"]
             track_url = results["external_urls"]["spotify"]
             explicit = results["explicit"]
-            return_dict = [{"album_data": {"name": album,
-                                           "album_artists": album_artists,
-                                           "url": album_url,
-                                           "album_cover": album_cover,
-                                           "album_release_date": album_release_date,
-                                           "total_tracks": total_tracks},
-                            "track_data": {"name": name,
-                                           "artists": artists,
-                                           "track_number": track_number,
-                                           "url": track_url,
-                                           "explicit": explicit}}]
+            return_dict = [
+                {"album_data": {"name": album,
+                                "album_artists": album_artists,
+                                "url": album_url,
+                                "album_cover": album_cover,
+                                "album_release_date": album_release_date,
+                                "total_tracks": total_tracks},
+                 "track_data": {"name": name,
+                                "artists": artists,
+                                "track_number": track_number,
+                                "url": track_url,
+                                "explicit": explicit}}]
         elif characteristics[0] == 'album':
             results = self.spotify.album(characteristics[1])
             # album data
@@ -84,7 +85,6 @@ class spotr:
                          for track in results["tracks"]["items"]]
             track_urls = [track["external_urls"]["spotify"]
                           for track in results["tracks"]["items"]]
-            return_dict = []
             i = 1
             for song_name, artists, explicit, track_url in zip(
                     song_names, artistss, explicits, track_urls):
@@ -105,7 +105,6 @@ class spotr:
                             "explicit": explicit}})
         elif characteristics[0] == 'artist':
             offset = 0
-            return_dict = []
             results = self.spotify.artist_albums(characteristics[1])
             total_albums = results["total"]
             results_for_artist = self.spotify.artist(characteristics[1])
@@ -119,7 +118,9 @@ class spotr:
                     # Extract track data
                     trackresults = self.get_song_info(albumurl)
                     for trackitem in trackresults:
-                        if artist_name in str(trackitem["track_data"]["artists"]):
+                        if artist_name in str(
+                            trackitem["track_data"]["artists"]
+                        ):
                             return_dict.append(trackitem)
                 print(offset)
                 offset += 50
@@ -127,7 +128,6 @@ class spotr:
             offset = 0
             results = self.spotify.playlist_tracks(characteristics[1])
             total = results["total"]
-            return_dict = []
             while offset <= total:
                 results = self.spotify.playlist_tracks(
                     characteristics[1], offset=offset)
@@ -135,7 +135,9 @@ class spotr:
                 # album_data
                 albums = [track["album"]["name"] for track in tracks]
                 album_artistss = [[album_artist["name"]
-                                   for album_artist in track["album"]["artists"]] for track in tracks]
+                                   for album_artist
+                                   in track["album"]["artists"]]
+                                  for track in tracks]
                 album_urls = [track["album"]["external_urls"]
                               ["spotify"] for track in tracks]
                 album_covers = [track["album"]["images"][0]["url"]
@@ -152,40 +154,44 @@ class spotr:
                 track_urls = [track["external_urls"]["spotify"]
                               for track in tracks]
                 explicits = [track["explicit"] for track in tracks]
-                return_dict += [{"album_data": {"name": album,
-                                                "album_artists": str(album_artists).strip("[]"),
-                                                "url": album_url,
-                                                "album_cover": album_cover,
-                                                "album_release_date": album_release_date,
-                                                "total_tracks": total_tracks},
-                                 "track_data": {"name": name,
-                                                "artists": artists,
-                                                "track_number": track_number,
-                                                "url": track_url,
-                                                "explicit": explicit}} for album,
-                                album_artists,
-                                album_url,
-                                album_cover,
-                                album_release_date,
-                                total_tracks,
-                                name,
-                                artists,
-                                track_number,
-                                track_url,
-                                explicit in zip(albums,
-                                                album_artistss,
-                                                album_urls,
-                                                album_covers,
-                                                album_release_dates,
-                                                total_trackss,
-                                                names,
-                                                artistss,
-                                                track_numbers,
-                                                track_urls,
-                                                explicits)]
+                return_dict += [
+                    {"album_data": {"name": album,
+                                    "album_artists": (str(album_artists)
+                                                      .strip("[]")
+                                                      ),
+                                    "url": album_url,
+                                    "album_cover": album_cover,
+                                    "album_release_date": album_release_date,
+                                    "total_tracks": total_tracks},
+                     "track_data": {"name": name,
+                                    "artists": artists,
+                                    "track_number": track_number,
+                                    "url": track_url,
+                                    "explicit": explicit}} for album,
+                    album_artists,
+                    album_url,
+                    album_cover,
+                    album_release_date,
+                    total_tracks,
+                    name,
+                    artists,
+                    track_number,
+                    track_url,
+                    explicit in zip(albums,
+                                    album_artistss,
+                                    album_urls,
+                                    album_covers,
+                                    album_release_dates,
+                                    total_trackss,
+                                    names,
+                                    artistss,
+                                    track_numbers,
+                                    track_urls,
+                                    explicits)]
                 offset += 100
         return return_dict
 
 
 if __name__ == "__main__":
-    print("this is not the main program this just retrives data from spotify using their web api")
+    print("this is not the main program, \
+         this just retrives data from spotify using their web api")

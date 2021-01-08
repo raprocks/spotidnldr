@@ -20,12 +20,15 @@ setuptools.setup(
     package_data={'spotidnldr': ["static/*", "templates/*"]},
     install_requires=[
         "spotipy",
-        "pytubeX",
+        "youtube-dl",
         "eyeD3",
         "requests",
+        "pytube",
         "click",
         "ffmpeg-python",
-        "ytmusicapi",
+    ],
+    dependency_links=[
+        'http://github.com/tombulled/python-youtube-music/tarball/master',
     ],
     classifiers=[
         "Natural Language :: English",

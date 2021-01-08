@@ -1,3 +1,4 @@
+import pathlib
 import urllib.request
 import os
 from pathlib import Path
@@ -10,9 +11,10 @@ def dl_jpg(url, file_path, file_name):
         file_name = name.replace("/", "|")
     if "\\" in name:
         file_name = name.replace("\\", "")
-    print('[*] downloading cover art...', end='')
-    full_path = Path(os.path.join(file_path, str(file_name + '.jpg')))
-    urllib.request.urlretrieve(url, full_path)
+    print('[*] downloading cover art...')
+    full_path = Path(pathlib.Path(file_path, str(file_name + '.jpg')))
+    print(repr(full_path))
+    urllib.request.urlretrieve(url=url, filename=full_path)
     print('Done')
     return full_path
 

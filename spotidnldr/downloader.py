@@ -1,4 +1,5 @@
 import os
+import pathlib
 from pytube import YouTube
 from spotidnldr.progress_bar import download_progress_bar
 
@@ -16,7 +17,7 @@ class YDL():
 
     def downloader(self, filename):
         outfile = self.best_audio.download(
-            output_path='./.temp', filename=filename)
+            output_path=pathlib.Path('./.temp'), filename=filename)
         return outfile
 
 

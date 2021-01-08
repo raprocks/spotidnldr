@@ -1,4 +1,6 @@
 import os
+import pathlib
+import logging
 import click
 from spotidnldr.spot import spotr
 import spotidnldr.env_setup as e
@@ -7,6 +9,9 @@ from spotidnldr.youtube_search import youtube_search
 from spotidnldr.downloader import YDL
 from spotidnldr.tag_embedder import tag_embed
 from spotidnldr.converter import convert_to_mp3
+
+logger = logging.basicConfig(level=logging.DEBUG)
+
 
 @click.group()
 def cli():
@@ -42,12 +47,14 @@ def download(url, output, verbose):
     for each in res:
         album_cover_url = each["album_data"]["album_cover"]
         name = each["track_data"]["name"] + " - " + \
-            str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
+            str(each["track_data"]["artists"]).strip(
+                "[]").strip("\'").replace("\'", "")
         title = each["track_data"]["name"]
         song_artists = str(each["track_data"]["artists"]).strip(
             "[]").strip("\'").replace("\'", "")
         album_name = each["album_data"]["name"]
-        album_artists = str(each["album_data"]["album_artists"]).strip("[]").strip("\'").replace("\'", "")
+        album_artists = str(each["album_data"]["album_artists"]).strip(
+            "[]").strip("\'").replace("\'", "")
         track_number = each["track_data"]["track_number"]
         total_tracks = each["album_data"]["total_tracks"]
         release_date = each["album_data"]["album_release_date"]
@@ -55,17 +62,21 @@ def download(url, output, verbose):
             name = name.replace('/', "")
             name = name.replace("/\\", "")
         if f"{name}.mp3" in str(os.listdir(output)):
-            print(f"a file named {name} already in {output} , not downloading it")
+            print(
+                f"a file named {name} already in {output} , not downloading it")
             continue
         if ".temp" not in os.listdir():
             os.mkdir(".temp")
         print("got info from spotify")
-        img_name = dl_jpg(album_cover_url, "./.temp/", name)
+        img_save_path = pathlib.Path('./.temp')
+        img_name = dl_jpg(album_cover_url, img_save_path, name)
         print("got image")
-        retrived_from_youtube = youtube_search(q=name, return_indices=3)
-        print("got youtube url")
-        infile = YDL(retrived_from_youtube[0]).downloader(filename=name)
-        print("downloaded from youtube")
+        retrived_from_youtube = youtube_search(q=name)
+        print("got youtube url", retrived_from_youtube)
+        infile = YDL(retrived_from_youtube).downloader(filename=name)
+        print("downloaded from youtube", infile)
+        print("in :", infile)
+        print("out :", output)
         convert_to_mp3(infile, os.path.join(output, f"{name}.mp3"), verbose)
         print("converted")
         _ = tag_embed(os.path.join(output,
@@ -93,7 +104,8 @@ def web_downloader(url, output, verbose):
     for each in res:
         album_cover_url = each["album_data"]["album_cover"]
         name = each["track_data"]["name"] + " - " + \
-            str(each["track_data"]["artists"]).strip("[]").strip("\'").replace("\'", "")
+            str(each["track_data"]["artists"]).strip(
+                "[]").strip("\'").replace("\'", "")
         title = each["track_data"]["name"]
         song_artists = str(each["track_data"]["artists"]).strip(
             "[]").strip("\'").replace("\'", "")
