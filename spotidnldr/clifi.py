@@ -62,9 +62,15 @@ def download(url, output, verbose):
             name = name.replace('/', "")
             name = name.replace("/\\", "")
         if f"{name}.mp3" in str(os.listdir(output)):
-            print(
-                f"a file named {name} already in {output} , not downloading it")
-            continue
+            print(f"a file named {name} already in {output}")
+            overwrite = input(
+                "Do you still want to Overwrite \
+                    and Download the File Again? Y/N")
+            if y == overwrite.lower():
+                os.remove(os.path.abspath(os.path.join(output, name+".mp3")))
+                print("deleted")
+            else:
+                continue
         if ".temp" not in os.listdir():
             os.mkdir(".temp")
         print("got info from spotify")
