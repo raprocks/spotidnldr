@@ -66,7 +66,7 @@ def download(url, output, verbose):
             overwrite = input(
                 "Do you still want to Overwrite \
                     and Download the File Again? Y/N")
-            if y == overwrite.lower():
+            if 'y' == overwrite.lower():
                 os.remove(os.path.abspath(os.path.join(output, name+".mp3")))
                 print("deleted")
             else:
