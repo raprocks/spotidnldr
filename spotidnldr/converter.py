@@ -17,7 +17,8 @@ def convert_to_mp3(file_path,
         audio,
         str(pathlib.Path(out_file_path)),
         format="mp3",
-        audio_bitrate=192000)
+        audio_bitrate=audiobitrate
+    )
     print(out)
     ffmpeg.run(out, quiet=(not verbose))
     print("[*] converted to mp3 with bitrate of {audiobitrate/1000}K")
