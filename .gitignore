@@ -1,10 +1,11 @@
 .cache-shcixv399pe9eirp62esm93
 .temp/
 .youtubepiclientcredent
-spot.py
 spotidnldr/.temp/
 spotidnldr/__pycache__/
 spotidnldr/genius_lyrixer.py
 web.py
 dist
 spotidnldr.egg-info/
+*.mp3
+*.jpg
