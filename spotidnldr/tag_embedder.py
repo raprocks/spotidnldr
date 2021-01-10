@@ -36,6 +36,7 @@ def tag_embed(
     print('[*] adding cover art...', end='')
     audio_file.tag.images.set(type_=3,
                               img_data=open(img_path, 'rb').read(),
+                              description="thumbnail",
                               mime_type="image/jpeg",
                               img_url=None)
     print('Done')
