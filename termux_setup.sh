@@ -28,13 +28,12 @@ fi
 
 #get spotidnldr
 echo "Getting Spotidnldr"
-pip install --upgrade spotidnldr
-# git clone https://github.com/raprocks/spotidnldr.git $HOME/spotidnldr
+# pip install --upgrade spotidnldr
+git clone https://github.com/raprocks/spotidnldr.git $HOME/spotidnldr
+cd $HOME/spotidnldr
+python -m pip install .
 
 # traverse into directory
-# cd $HOME/spotidnldr
-
-# pip install .
 
 echo "Setting environment variables and adding to bashrc/zshrc"
 echo 'export SPOTIFY_DOWNLOAD_PATH="/storage/emulated/0/Songs/"' >> $HOME/.bashrc
