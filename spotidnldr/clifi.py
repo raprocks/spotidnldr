@@ -10,8 +10,6 @@ from spotidnldr.downloader import YDL
 from spotidnldr.tag_embedder import tag_embed
 from spotidnldr.converter import convert_to_mp3
 
-logger = logging.basicConfig(level=logging.DEBUG)
-
 
 @click.group()
 def cli():
@@ -19,8 +17,9 @@ def cli():
 
 
 @cli.command()
-@click.option('-v', '--verbose', is_flag=True, default=True,
-              help="flag for verbosity, usage of this flag gives more output use this for sending or finding errors.")
+@click.option('-v', '--verbose', is_flag=True, default=False,
+              help="flag for verbosity, usage of this flag gives more\
+                   output use this for sending or finding errors.")
 @click.option('-o', "--output",
               help="provide a output path for the song explicitly.",
               default="./",
@@ -38,6 +37,10 @@ def download(url, output, verbose):
 
     URL must be a valid spotify link of a song, album or a playlist.
     """
+    if verbose:
+        logging.basicConfig(level=logging.DEBUG)
+    else:
+        pass
     print('saving Songs to', output)
     clientid = e.SPOTIPY_CLIENT_ID
     clientsecret = e.SPOTIPY_CLIENT_SECRET
@@ -83,7 +86,9 @@ def download(url, output, verbose):
         print("downloaded from youtube", infile)
         print("in :", infile)
         print("out :", output)
-        convert_to_mp3(infile, os.path.join(output, f"{name}.mp3"), verbose)
+        convert_to_mp3(infile,
+                       os.path.join(output, f"{name}.mp3"),
+                       verbose=verbose)
         print("converted")
         _ = tag_embed(os.path.join(output,
                                    f"{name}.mp3"),
@@ -95,7 +100,7 @@ def download(url, output, verbose):
                       total_tracks=total_tracks,
                       img_path=img_name)
         print("added metadata")
-        os.remove(img_name)
+        # os.remove(img_name)
         os.remove(infile)
         print("cleanup complete")
         print("\n", name, "Done")
