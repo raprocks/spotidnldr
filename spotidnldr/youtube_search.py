@@ -1,11 +1,19 @@
-from ytm import YouTubeMusic
+from ytmusicapi import YTMusic
+import sys
 
 
 def youtube_search(q):
     print(f'[*] searching {q}')
-    client = YouTubeMusic()
-    res = client.search(q)
-    music_id = res['songs'][0]['id']
+    print(q)
+    client = YTMusic()
+    res = client.search(query=str(q), filter="songs")
+    try:
+        music_id = res[0]['videoId']
+    except KeyError or IndexError as err:
+        music_id = ''
+        print("couldnt get results, exiting", err)
+        sys.exit()
+
     music_url = f"https://music.youtube.com/watch?v={music_id}"
     return music_url
 

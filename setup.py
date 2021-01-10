@@ -26,9 +26,7 @@ setuptools.setup(
         "pytube",
         "click",
         "ffmpeg-python",
-    ],
-    dependency_links=[
-        'http://github.com/tombulled/python-youtube-music/tarball/master',
+        "ytmusicapi",
     ],
     classifiers=[
         "Natural Language :: English",
