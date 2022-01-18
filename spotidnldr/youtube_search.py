@@ -3,14 +3,14 @@ import sys
 
 
 def youtube_search(q):
-    print(f'[*] searching {q}')
+    print(f"[*] searching {q}")
     print(q)
     client = YTMusic()
     res = client.search(query=str(q), filter="songs")
     try:
-        music_id = res[0]['videoId']
+        music_id = res[0]["videoId"]
     except KeyError or IndexError as err:
-        music_id = ''
+        music_id = ""
         print("couldnt get results, exiting", err)
         sys.exit()
 

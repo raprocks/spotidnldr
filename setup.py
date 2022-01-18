@@ -1,6 +1,6 @@
 import setuptools
 
-with open("README.md", 'r+') as f:
+with open("README.md", "r+") as f:
     print("opened")
     long_de = f.read()
 
@@ -15,9 +15,11 @@ setuptools.setup(
     long_description=long_de,
     long_description_content_type="text/markdown",
     url="https://github.com/raprocks/spotindnldr",
-    license='GPLv3+',
-    packages=["spotidnldr", ],
-    package_data={'spotidnldr': ["static/*", "templates/*"]},
+    license="GPLv3+",
+    packages=[
+        "spotidnldr",
+    ],
+    package_data={"spotidnldr": ["static/*", "templates/*"]},
     install_requires=[
         "spotipy",
         "youtube-dl",
@@ -34,10 +36,10 @@ setuptools.setup(
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         "Operating System :: OS Independent",
     ],
-    entry_points='''
+    entry_points="""
         [console_scripts]
         spoti=spotidnldr.clifi:cli
-    ''',
-    python_requires='>=3.6',
+    """,
+    python_requires=">=3.6",
     include_package_data=True,
 )
