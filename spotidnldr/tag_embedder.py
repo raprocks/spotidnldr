@@ -44,6 +44,8 @@ def tag_embed(
     )
     print("Done")
     print("[*] saving audio...", end="")
+    audio_file.tag.save(version=(1, None, None))
+    audio_file.tag.save(version=(2, 3, 0))
     audio_file.tag.save()
     print("Done")
     return file_to_work
