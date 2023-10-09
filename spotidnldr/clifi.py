@@ -34,14 +34,17 @@ def cli():
     show_default=True,
     envvar="SPOTIFY_DOWNLOAD_PATH",
 )
+@click.option("-y","--always-overwrite", help="Always override and re download songs already in the output directory.", count=True)
+@click.option("-n","--never-overwrite", help="never override and re download songs already in the output directory.", count=True)
 @click.argument("url", required=True, type=str)
 @click.version_option(version="v1.3.0", prog_name="spotidnldr")
-def download(url, output, verbose):
+def download(url: str, output: click.Path, verbose: bool, always_overwrite: int, never_overwrite: int):
     """
     Downloads Songs from URL.
 
     URL must be a valid spotify link of a song, album or a playlist.
     """
+    chars = ["\"", "\\", "/", "?", ":", "*", "<", ">", "|"]
     if verbose:
         logging.basicConfig(level=logging.DEBUG)
     else:
@@ -57,6 +60,9 @@ def download(url, output, verbose):
             + " - "
             + str(each["track_data"]["artists"]).strip("[]").strip("'").replace("'", "")
         )
+        for character in chars:
+            name = name.replace(character, "")
+
         title = each["track_data"]["name"]
         song_artists = (
             str(each["track_data"]["artists"]).strip("[]").strip("'").replace("'", "")
@@ -76,10 +82,15 @@ def download(url, output, verbose):
             name = name.replace("/\\", "")
         if f"{name}.mp3" in str(os.listdir(output)):
             print(f"a file named {name} already in {output}")
-            overwrite = input(
-                "Do you still want to Overwrite \
-                    and Download the File Again? Y/N"
-            )
+            if always_overwrite > 1:
+                overwrite = "Y"
+            elif never_overwrite > 1:
+                overwrite = "N"
+            else:
+                overwrite = input(
+                    "Do you still want to Overwrite \
+                        and Download the File Again? Y/N"
+                )
             if "y" == overwrite.lower():
                 os.remove(os.path.abspath(os.path.join(output, name + ".mp3")))
                 print("deleted")
@@ -111,7 +122,7 @@ def download(url, output, verbose):
             img_path=img_name,
         )
         print("added metadata")
-        # os.remove(img_name)
+        os.remove(img_name)
         os.remove(infile)
         print("cleanup complete")
         print("\n", name, "Done")

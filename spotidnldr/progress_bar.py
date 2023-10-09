@@ -1,4 +1,7 @@
-def download_progress_bar(stream, chunk, bytes_remaining):
+from typing import Any
+
+
+def download_progress_bar(stream, chunk: Any, bytes_remaining: int):
     total_size = stream.filesize
     width = 32
     phases = (" ", "▏", "▎", "▍", "▌", "▋", "▊", "▉", "█")

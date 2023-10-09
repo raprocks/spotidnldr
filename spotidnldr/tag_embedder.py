@@ -1,4 +1,6 @@
 import eyed3
+from eyed3.id3 import Tag
+from eyed3.id3.tag import ImagesAccessor
 
 
 def tag_embed(
@@ -15,6 +17,9 @@ def tag_embed(
     print("[*] adding meta data")
     print("[*] loading audio...", end="")
     audio_file = eyed3.load(str(file_to_work))
+    if not isinstance(audio_file.tag, Tag):
+        print("Tag not found, creating it.")
+        return None
     print("Done")
     print("[*] adding title...", end="")
     audio_file.tag.title = title
@@ -35,6 +40,8 @@ def tag_embed(
     audio_file.tag.release_date = release_date
     print("Done")
     print("[*] adding cover art...", end="")
+    if not isinstance(audio_file.tag.images, ImagesAccessor):
+        raise Exception("Not supported.")
     audio_file.tag.images.set(
         type_=3,
         img_data=open(img_path, "rb").read(),

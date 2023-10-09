@@ -3,7 +3,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 
 
 class spotr:
-    def __init__(self, clientid, clientsecret):
+    def __init__(self, clientid: str, clientsecret: str):
         try:
             local_token = SpotifyClientCredentials(
                 client_id=clientid, client_secret=clientsecret
@@ -16,21 +16,20 @@ class spotr:
                 err,
             )
 
-    def get_userid_from_url(self, url):
-        url = str(url)
-        url = url.split("/")
-        userid = url[-1]
+    def get_userid_from_url(self, url: str):
+        url_split = url.split("/")
+        userid = url_split[-1]
         if "?" in userid:
             userid = userid.split("?")[0]
         else:
             pass
-        return str(userid)
+        return userid
 
-    def get_characteristics(self, url):
+    def get_characteristics(self, url: str):
         url = str(url)
-        url = url.split("/")
-        link_type = str(url[3])
-        link_id = str(url[4])
+        url_split = url.split("/")
+        link_type = str(url_split[3])
+        link_id = str(url_split[4])
         if "?" in link_id:
             link_id = link_id.split("?")
             link_id = link_id[0]
